@@ -1,4 +1,16 @@
-# Boilermaker
+# Grace Flopper
+
+Built with Boilermaker (see Boilermaker).
+
+## Grace's Fruity Seeds
+
+We sell seeds.
+
+## Quick Links
+
+- [User specs](https://gist.github.com/Julissa93/6c922a128d4add4b2a9a947b5d4939c3)
+- [Component Layout](https://www.figma.com/file/1TwnVrLMyiosl1jU6lDDHk/E-commerce?node-id=7%3A23)
+- [Database Schema]()
 
 _Good things come in pairs_
 
