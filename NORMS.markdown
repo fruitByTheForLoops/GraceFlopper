@@ -76,6 +76,8 @@ Reference [Establishing Norms][EstablishingNorms]
 ### Opinions on Personal Time
 
 - Kevin: I prefer to have a strict daytime working schedule with nights and weekends to myself. Happy to do overtime, but it would need to be explicitly planned rather than assumed.
+- Jason: Prefers afternoon, after lunch is best.
+- Jeff: Has no preferences. Strong all day long.
 
 ### Anticipated Conflicts
 _Put conflicts here_
@@ -91,9 +93,8 @@ _Put conflicts here_
 - Pair program on assigned tasks
 - Record issues that are non-blocking and discuss right after lunch at re-group meeting
 - Bring up any blocking issues after 15 minutes of spinning your wheels
-- At 2:30pm have re-group meeting where you check-in with blockers, status updates and plan for End of Day merge
-- Immediately prior to end of day make applicable PRs(Pull Request), review each other’s code and merge into master
-
+- At 13:30 CST have re-group meeting where you check-in with blockers, status updates and plan for End of Day merge
+- Immediately prior to end of day make applicable PRs(Pull Request), review each other’s code and merge into main.
 
 ## Team expectations
 
@@ -105,16 +106,17 @@ _Put conflicts here_
 - Share the mic
 - Disagree often and discuss -- argue infrequently
 - At least message the group when you change what you are working on
+
 - Issues
-- If the group is divided on a certain decision we will take the following steps:
-- Take 10-15 minute break
-- List out the pros / cons
-- Vote on it
-- If the vote is split, escalate to a fellow or instructor
-- If you are frustrated
-- Take a walk or get some water
-- Talk constructively about actionable items (e.g. raise your hand instead of interrupting, let me learn and struggle until I ask you for help, etc.)
-- Bring in a 3rd party (e.g. fellow, instructor) to mediate if you feel too frustrate
+  - If the group is divided on a certain decision we will take the following steps:
+  - Take 10-15 minute break
+  - List out the pros / cons
+  - Vote on it
+  - If the vote is split, escalate to a fellow or instructor
+  - If you are frustrated
+  - Take a walk or get some water
+  - Talk constructively about actionable items (e.g. raise your hand instead of interrupting, let me learn and struggle until I ask you for help, etc.)
+  - Bring in a 3rd party (e.g. fellow, instructor) to mediate if you feel too frustrate
 
 ## Git
 
