@@ -10,7 +10,7 @@ We sell seeds.
 
 - [User specs](https://gist.github.com/Julissa93/6c922a128d4add4b2a9a947b5d4939c3)
 - [Component Layout](https://www.figma.com/file/1TwnVrLMyiosl1jU6lDDHk/E-commerce?node-id=7%3A23)
-- [Database Schema]()
+- [Database Schema](https://app.diagrams.net/#G1nRXxcdQk2tlfCLZBtno4FE2vB1XOIpLA)
 
 _Good things come in pairs_
 
