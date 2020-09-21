@@ -66,27 +66,6 @@ Reference [Establishing Norms][EstablishingNorms]
 - ‡ Test Cho
 - 🕺 None  Hu
 </details>
-<details>
-<summary>9/30</summary>
-- ✔ Task Hu
-- 🔃 Git Lee
-- ‡ Test Rossy
-- 🕺 None  Cho
-</details>
-<details>
-<summary>10/01</summary>
-- ✔ Task Cho
-- 🔃 Git Hu
-- ‡ Test Lee
-- 🕺 None  Rossy
-</details>
-<details>
-<summary>10/02</summary>
-- ✔ Task Rossy
-- 🔃 Git Cho
-- ‡ Test Hu
-- 🕺 None  Lee
-</details>
 
 ## 🗓 Availability
 
@@ -102,6 +81,8 @@ Reference [Establishing Norms][EstablishingNorms]
 _Put conflicts here_
 
 - 🚫 Kevin has office hours 16:00 CST Thursday 9/24
+- Jason has office hours 2:30 PM CST Thursday 9/24
+- Jeff has office hours 2:45 PM CST Thursday 9/24
 
 ## Daily process
 
