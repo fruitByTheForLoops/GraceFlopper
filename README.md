@@ -1,4 +1,27 @@
-# Boilermaker
+# Grace Flopper
+
+An e-commerce website built with [Boilermaker](https://github.com/FullstackAcademy/boilermaker).
+
+## Features
+
+- [User specs](https://gist.github.com/Julissa93/6c922a128d4add4b2a9a947b5d4939c3)
+
+### Advanced Feature Ideas
+
+- [IP Geolocation API](https://ipdata.co/)
+
+## Software Architecture
+
+- [Component Layout](https://www.figma.com/file/1TwnVrLMyiosl1jU6lDDHk/E-commerce?node-id=7%3A23)
+- [Database Schema](https://app.diagrams.net/#G1nRXxcdQk2tlfCLZBtno4FE2vB1XOIpLA)
+
+## The Business
+
+We sell seeds. Kind of like these folks in real life (IRL) at [Burpee](https://www.burpee.com/).
+
+---
+
+# Boilermaker README
 
 _Good things come in pairs_
 
