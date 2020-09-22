@@ -7,22 +7,29 @@ import {logout} from '../store'
 const Navbar = ({handleClick, isLoggedIn}) => (
   <div>
     <h1>GraceFlopper</h1>
-    <nav>
-      {isLoggedIn ? (
-        <div>
-          {/* The navbar will show these links after you log in */}
-          <Link to="/home">Home</Link>
-          <a href="#" onClick={handleClick}>
-            Logout
-          </a>
-        </div>
-      ) : (
-        <div>
-          {/* The navbar will show these links before you log in */}
-          <Link to="/login">Login</Link>
-          <Link to="/signup">Sign Up</Link>
-        </div>
-      )}
+    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div className="collapse navbar-collapse" id="navbarSupportedContent">
+        {isLoggedIn ? (
+          <div>
+            {/* The navbar will show these links after you log in */}
+            <Link to="/home" class="navbar-brand" href="#">
+              Home
+            </Link>
+            <a href="#" onClick={handleClick}>
+              Logout
+            </a>
+          </div>
+        ) : (
+          <div>
+            {/* The navbar will show these links before you log in */}
+            <Link to="/login" class="navbar-brand" href="#">
+              Login
+            </Link>
+            <Link to="/signup">Sign Up</Link>
+            <Link to="/cart">Cart</Link>
+          </div>
+        )}
+      </div>
     </nav>
     <hr />
   </div>
