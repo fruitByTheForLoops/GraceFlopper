@@ -48,9 +48,9 @@ describe('FruitySeed model', () => {
         checkedOut: false,
       })
 
-      const associatedCarts = await aSeed.getCarts()
-      //we can use either of two test cases below
-      expect(associatedCarts[0].getDataValue('checkedOut')).to.be.equal(false)
+      const associatedCarts = await aSeed.getCarts() // returns [ ModelInstance ]
+      expect(associatedCarts[0].getDataValue('checkedOut')) // accesses the checkedOut attribute
+        .to.be.equal(false)
     })
   })
 })
