@@ -1,9 +1,10 @@
 /* Constraints */
 // generates a random price given a max and min
+// in pennies
 // expect all prices to be $n.95
 const randomPrice = (min, max) => {
-  const randomNum = Math.floor(Math.random() * (max - min) + min) - 0.05
-  return randomNum.toFixed(2)
+  const randomNum = Math.floor(Math.random() * (max - min) + min) - 5
+  return randomNum
 }
 
 // generates a random stock quantity given a max and min
