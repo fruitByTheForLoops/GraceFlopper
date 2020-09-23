@@ -23,6 +23,8 @@ We sell seeds. Kind of like these folks in real life (IRL) at [Burpee](https://w
 
 Expects you to create a backing resource, i.e. postgresql database `fruity-seeds` and `fruity-seeds-test`. So do this before running anything.
 
+You also need a [trefle.io](trefle.io) token in a secrets.js file. The secrets file should set environment variable `TREFLE_TOKEN` to a valid token.
+
 Make sure all the tests pass by running `npm run test`.
 
 ---
