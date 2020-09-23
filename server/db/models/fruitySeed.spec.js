@@ -50,10 +50,7 @@ describe('FruitySeed model', () => {
 
       const associatedCarts = await aSeed.getCarts()
       //we can use either of two test cases below
-      expect(associatedCarts[0].dataValues.checkedOut).to.be.equal(false)
-      expect(associatedCarts[0].dataValues).includes({
-        checkedOut: false,
-      })
+      expect(associatedCarts[0].getDataValue('checkedOut')).to.be.equal(false)
     })
   })
 })
