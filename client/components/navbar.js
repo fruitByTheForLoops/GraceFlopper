@@ -34,18 +34,12 @@ const Navbar = ({handleClick, isLoggedIn}) => (
                   Cart
                 </Link>
               </li>
-              <li>
-                <a href="#" onClick={handleClick}>
+              <li className="nav-item">
+                <a href="#" className="nav-link" onClick={handleClick}>
                   Logout
                 </a>
               </li>
             </ul>
-            {/* <Link to="/home" className="navbar-brand" href="#">
-              Home
-            </Link>
-            <a href="#" onClick={handleClick}>
-              Logout
-            </a> */}
           </div>
         ) : (
           <div>
@@ -75,6 +69,17 @@ const Navbar = ({handleClick, isLoggedIn}) => (
           </div>
         )}
       </div>
+      <form className="form-inline my-2 my-lg-0">
+        <input
+          className="form-control mr-sm-2"
+          type="search"
+          placeholder="Search"
+          aria-label="Search"
+        />
+        <button className="btn btn-outline-success my-2 my-sm-0" type="submit">
+          Search
+        </button>
+      </form>
     </nav>
     <hr />
   </div>

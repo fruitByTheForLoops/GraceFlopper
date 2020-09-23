@@ -24,3 +24,7 @@ form div {
   width: 60%;
   margin: 0 auto;
 }
+
+.carousel-item {
+  height: 480px;
+}
