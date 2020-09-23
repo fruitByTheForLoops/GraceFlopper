@@ -13,9 +13,11 @@ const FruitySeed = db.define('fruityseed', {
   },
   seedsPerUnit: {
     type: Sequelize.INTEGER,
+    defaultValue: 500,
   },
   unit: {
     type: Sequelize.STRING,
+    defaultValue: 'Packet',
   },
   imageUrl: {
     type: Sequelize.TEXT,
@@ -23,6 +25,7 @@ const FruitySeed = db.define('fruityseed', {
   },
   stock: {
     type: Sequelize.INTEGER,
+    allowNull: false,
   },
 })
 
