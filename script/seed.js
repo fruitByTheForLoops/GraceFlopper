@@ -1,18 +1,45 @@
 'use strict'
 
 const db = require('../server/db')
-const {User} = require('../server/db/models')
+const {User, FruitySeed, Cart} = require('../server/db/models')
+const fetchData = require('./seedData')
+const {prices, quantities} = require('./randomPricesAndQuantities')
 
 async function seed() {
   await db.sync({force: true})
   console.log('db synced!')
+  const products = await fetchData()
+  const pricesArray = prices(products.length, 100, 3000)
+  const quantitiesArray = quantities(products.length, 1, 10)
+  const seeds = products.map((product, index) => {
+    return {
+      ...product,
+      pricePerUnit: pricesArray[index],
+      stock: quantitiesArray[index],
+    }
+  })
+
+  console.log(seeds[0])
+
+  const fruitySeeds = await Promise.all(
+    seeds.map((aseed) => FruitySeed.create(aseed))
+  )
 
   const users = await Promise.all([
     User.create({email: 'cody@email.com', password: '123'}),
-    User.create({email: 'murphy@email.com', password: '123'})
+    User.create({email: 'murphy@email.com', password: '123'}),
   ])
 
+  await Promise.all(
+    users.map((user) =>
+      user.addCart({
+        checkedOut: false,
+      })
+    )
+  )
+
   console.log(`seeded ${users.length} users`)
+  console.log(`seeded ${fruitySeeds.length} seeds`)
   console.log(`seeded successfully`)
 }
 

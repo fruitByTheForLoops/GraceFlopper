@@ -1,3 +1,4 @@
+const secrets = require('../secrets.js')
 const fetch = require('node-fetch')
 const TREFLE_TOKEN = process.env.TREFLE_TOKEN
 
@@ -7,9 +8,9 @@ const fetchData = async () => {
   )
   const {data} = await response.json()
   const filteredData = data.map((el) => ({
-    common_name: el.common_name,
-    image_url: el.image_url,
-    links: el.links.self,
+    name: el.common_name,
+    imageUrl: el.image_url,
+    // links: el.links.self, TODO: Use this later
   }))
   /* In progress. TODO: fetch detailed data per plant */
   // for (let i = 0; i < filteredData.length; i++) {

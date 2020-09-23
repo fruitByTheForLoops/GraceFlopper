@@ -29,6 +29,4 @@ const quantities = (numberOfProducts, min, max) =>
     .fill(1)
     .map((elem) => randomStock(min, max) * elem)
 
-console.log(quantities(10, 1, 10))
-console.log(prices(10, 1, 30))
 module.exports = {prices, quantities}
