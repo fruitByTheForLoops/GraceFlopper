@@ -48,10 +48,9 @@ describe('FruitySeed model', () => {
         checkedOut: false,
       })
 
-      const associatedCarts = await aSeed.getCarts()
-      console.log(associatedCarts)
-      // const associatedCart = associatedCarts.pop();
-      expect(associatedCarts).to.be.equal({checkedOut: false})
+      const associatedCarts = await aSeed.getCarts() // returns [ ModelInstance ]
+      expect(associatedCarts[0].getDataValue('checkedOut')) // accesses the checkedOut attribute
+        .to.be.equal(false)
     })
   })
 })
