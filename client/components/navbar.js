@@ -6,23 +6,80 @@ import {logout} from '../store'
 
 const Navbar = ({handleClick, isLoggedIn}) => (
   <div>
-    <h1>BOILERMAKER</h1>
-    <nav>
-      {isLoggedIn ? (
-        <div>
-          {/* The navbar will show these links after you log in */}
-          <Link to="/home">Home</Link>
-          <a href="#" onClick={handleClick}>
-            Logout
-          </a>
-        </div>
-      ) : (
-        <div>
-          {/* The navbar will show these links before you log in */}
-          <Link to="/login">Login</Link>
-          <Link to="/signup">Sign Up</Link>
-        </div>
-      )}
+    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div className="navbar-brand">GraceFlopper</div>
+      <button
+        className="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span className="navbar-toggler-icon" />
+      </button>
+      <div className="collapse navbar-collapse" id="navbarSupportedContent">
+        {isLoggedIn ? (
+          <div>
+            {/* The navbar will show these links after you log in */}
+            <ul className="navbar-nav mr-auto">
+              <li className="nav-item active">
+                <Link to="/" className="nav-link">
+                  Home <span className="sr-only">(current)</span>
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link to="/cart" className="nav-link">
+                  Cart
+                </Link>
+              </li>
+              <li className="nav-item">
+                <a href="#" className="nav-link" onClick={handleClick}>
+                  Logout
+                </a>
+              </li>
+            </ul>
+          </div>
+        ) : (
+          <div>
+            {/* The navbar will show these links before you log in */}
+            <ul className="navbar-nav mr-auto">
+              <li className="nav-item active">
+                <Link to="/" className="nav-link">
+                  Home <span className="sr-only">(current)</span>
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link to="/login" className="nav-link">
+                  Login
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link to="/signup" className="nav-link">
+                  Sign Up
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link to="/cart" className="nav-link">
+                  Cart
+                </Link>
+              </li>
+            </ul>
+          </div>
+        )}
+      </div>
+      <form className="form-inline my-2 my-lg-0">
+        <input
+          className="form-control mr-sm-2"
+          type="search"
+          placeholder="Search"
+          aria-label="Search"
+        />
+        <button className="btn btn-outline-success my-2 my-sm-0" type="submit">
+          Search
+        </button>
+      </form>
     </nav>
     <hr />
   </div>
