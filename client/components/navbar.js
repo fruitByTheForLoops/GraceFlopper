@@ -7,8 +7,19 @@ import {logout} from '../store'
 const Navbar = ({handleClick, isLoggedIn}) => (
   <div>
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div className="navbar-brand">GraceFlopper</div>
+      <button
+        className="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span className="navbar-toggler-icon" />
+      </button>
       <div className="collapse navbar-collapse" id="navbarSupportedContent">
-        <h1 className="navbar-brand">GraceFlopper</h1>
         {isLoggedIn ? (
           <div>
             {/* The navbar will show these links after you log in */}
@@ -22,15 +33,28 @@ const Navbar = ({handleClick, isLoggedIn}) => (
         ) : (
           <div>
             {/* The navbar will show these links before you log in */}
-            <Link to="/login" className="navbar-brand" href="#">
-              Login
-            </Link>
-            <Link to="/signup" className="navbar-brand" href="#">
-              Sign Up
-            </Link>
-            <Link to="/cart" className="navbar-brand" href="#">
-              Cart
-            </Link>
+            <ul className="navbar-nav mr-auto">
+              <li className="nav-item active">
+                <Link to="/" className="nav-link">
+                  Home <span className="sr-only">(current)</span>
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link to="/login" className="nav-link">
+                  Login
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link to="/signup" className="nav-link">
+                  Sign Up
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link to="/cart" className="nav-link">
+                  Cart
+                </Link>
+              </li>
+            </ul>
           </div>
         )}
       </div>

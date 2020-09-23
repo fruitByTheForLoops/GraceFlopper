@@ -21,6 +21,6 @@ form div {
 }
 
 .carousel-images {
-  height: 500px;
-  width: 500px;
+  width: 60%;
+  margin: 0 auto;
 }
