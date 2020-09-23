@@ -49,9 +49,11 @@ describe('FruitySeed model', () => {
       })
 
       const associatedCarts = await aSeed.getCarts()
-      console.log(associatedCarts)
-      // const associatedCart = associatedCarts.pop();
-      expect(associatedCarts).to.be.equal({checkedOut: false})
+      //we can use either of two test cases below
+      expect(associatedCarts[0].dataValues.checkedOut).to.be.equal(false)
+      expect(associatedCarts[0].dataValues).includes({
+        checkedOut: false,
+      })
     })
   })
 })
