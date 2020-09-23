@@ -26,6 +26,8 @@ const prices = (numberOfProducts, min, max) =>
 const quantities = (numberOfProducts, min, max) =>
   Array(numberOfProducts)
     .fill(1)
-    .map((elem) => randomQuantityInStock(min, max) * elem)
+    .map((elem) => randomStock(min, max) * elem)
 
+console.log(quantities(10, 1, 10))
+console.log(prices(10, 1, 30))
 module.exports = {prices, quantities}
