@@ -14,7 +14,7 @@ describe('FruitySeed model', () => {
     beforeEach(async () => {
       aSeed = await FruitySeed.create({
         name: 'Arugula',
-        pricePerUnit: 3.95,
+        pricePerUnit: 395,
         seedsPerUnit: 1000,
         unit: 'Packet',
         imageUrl:
@@ -34,7 +34,7 @@ describe('FruitySeed model', () => {
         stock,
       }).to.be.deep.equal({
         name: 'Arugula',
-        pricePerUnit: 3.95,
+        pricePerUnit: 395,
         seedsPerUnit: 1000,
         unit: 'Packet',
         imageUrl:
