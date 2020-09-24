@@ -28,3 +28,7 @@ form div {
 .carousel-item {
   height: 480px;
 }
+
+.breadcrumb {
+  align-items: center;
+}
