@@ -7,11 +7,10 @@ class Products extends Component {
     this.props.fetch()
   }
   render() {
-    const products = this.props.products || []
+    const products = this.props.products
     {
       if (!Array.isArray(products)) return <div>Loading...</div>
     }
-    console.log('products ---->', products)
     return (
       <div>
         <nav aria-label="breadcrumb">
