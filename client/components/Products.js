@@ -8,6 +8,9 @@ class Products extends Component {
   }
   render() {
     const products = this.props.products || []
+    {
+      if (!Array.isArray(products)) return <div>Loading...</div>
+    }
     console.log('products ---->', products)
     return (
       <div>
@@ -21,21 +24,25 @@ class Products extends Component {
             </li>
           </ol>
         </nav>
-        {!products.id && <div>Loading...</div>}
         <div className="all-products">
           {products.map((product) => (
-            <div className="card" style="width: 18rem;">
-              we need to map our products to list in cards
-              <img src={product.imageUrl} className="card-img-top" alt="..." />
+            <div key={product.id} className="card">
+              <img
+                src={product.imageUrl}
+                className="card-img-top"
+                alt={product.name}
+              />
               <div className="card-body">
-                <h5 className="card-title">Card title</h5>
-                <p className="card-text">
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
-                </p>
-                <a href="#" className="btn btn-primary">
-                  Go somewhere
-                </a>
+                <h5 className="card-title">{product.name}</h5>
+                <ul>
+                  <li>Price: ${product.pricePerUnit / 100}</li>
+                  <li>
+                    {product.seedsPerUnit} seeds per {product.unit}
+                  </li>
+                </ul>
+                <button className="add-to-cart-button" type="button">
+                  Add To Cart
+                </button>
               </div>
             </div>
           ))}

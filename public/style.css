@@ -32,3 +32,18 @@ form div {
 .breadcrumb {
   align-items: center;
 }
+
+.card {
+  width: 18rem;
+  align-items: center;
+}
+
+.all-products {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.card-img-top {
+  width: 15rem;
+  height: 15rem;
+}
