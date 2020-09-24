@@ -19,8 +19,6 @@ async function seed() {
     }
   })
 
-  console.log(seeds[0])
-
   const fruitySeeds = await Promise.all(
     seeds.map((aseed) => FruitySeed.create(aseed))
   )
