@@ -2,13 +2,13 @@
 
 import {expect} from 'chai' // assertion library
 import React from 'react'
-import enzyme, {shallow} from 'enzyme' //
+import enzyme, {shallow} from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
-import {UserHome} from './user-home'
+import {Cart} from './Cart'
 
 const adapter = new Adapter()
 enzyme.configure({adapter})
 
 describe('Cart', () => {
-  let cart
+  it('render all the items in the cart for a given user', () => {})
 })
