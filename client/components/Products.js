@@ -9,9 +9,6 @@ class Products extends Component {
   }
   render() {
     const products = this.props.products
-    // {
-    //   if (!Array.isArray(products)) return <div>Loading...</div>
-    // }
     return (
       <div>
         <nav aria-label="breadcrumb">
