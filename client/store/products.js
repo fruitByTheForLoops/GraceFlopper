@@ -3,7 +3,7 @@ import axios from 'axios'
 //ACTION TYPES
 const GET_PRODUCTS = 'GET_PRODUCTS'
 //ACTION CREATOR
-const getProducts = (products) => ({type: GET_PRODUCTS, products})
+export const getProducts = (products) => ({type: GET_PRODUCTS, products})
 
 //THUNK CREATOR
 export const fetchProducts = () => async (dispatch) => {
