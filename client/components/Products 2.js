@@ -3,12 +3,15 @@ import {connect} from 'react-redux'
 import {fetchProducts} from '../store/products'
 import {Link} from 'react-router-dom'
 
-export class Products extends Component {
+class Products extends Component {
   componentDidMount() {
     this.props.fetch()
   }
   render() {
     const products = this.props.products
+    // {
+    //   if (!Array.isArray(products)) return <div>Loading...</div>
+    // }
     return (
       <div>
         <nav aria-label="breadcrumb">
