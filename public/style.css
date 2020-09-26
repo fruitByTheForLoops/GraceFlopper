@@ -22,9 +22,50 @@ form div {
 
 .carousel-images {
   width: 60%;
-  margin: 0 auto;
+  margin: auto;
 }
 
 .carousel-item {
   height: 480px;
+}
+
+.breadcrumb,
+.breadcrumb-item {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+}
+
+.card {
+  width: 18rem;
+  align-items: center;
+  margin: 1rem;
+  background-color: beige;
+  outline-style: auto;
+}
+
+.all-products {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+
+.card-img-top {
+  width: 15rem;
+  height: 15rem;
+  margin-top: 24px;
+}
+
+.form-control,
+.btn-outline-success {
+  padding: 0;
+  margin: 5px;
+}
+
+.card-body {
+  padding: 10px;
+  margin: 10px;
+  width: 240px;
 }

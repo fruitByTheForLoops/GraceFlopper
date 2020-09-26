@@ -7,7 +7,9 @@ import {logout} from '../store'
 const Navbar = ({handleClick, isLoggedIn}) => (
   <div>
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-      <div className="navbar-brand">GraceFlopper</div>
+      <div className="navbar-brand">
+        <img src="/GraceFlopper.png" height="50rem" width="200rem" />
+      </div>
       <button
         className="navbar-toggler"
         type="button"
@@ -69,36 +71,35 @@ const Navbar = ({handleClick, isLoggedIn}) => (
           </div>
         )}
       </div>
-      <form className="form-inline my-2 my-lg-0">
+      <form className="form-inline">
         <input
-          className="form-control mr-sm-2"
+          className="form-control"
           type="search"
           placeholder="Search"
           aria-label="Search"
         />
-        <button className="btn btn-outline-success my-2 my-sm-0" type="submit">
+        <button className="btn btn-outline-success" type="submit">
           Search
         </button>
       </form>
     </nav>
-    <hr />
   </div>
 )
 
 /**
  * CONTAINER
  */
-const mapState = state => {
+const mapState = (state) => {
   return {
-    isLoggedIn: !!state.user.id
+    isLoggedIn: !!state.user.id,
   }
 }
 
-const mapDispatch = dispatch => {
+const mapDispatch = (dispatch) => {
   return {
     handleClick() {
       dispatch(logout())
-    }
+    },
   }
 }
 
@@ -109,5 +110,5 @@ export default connect(mapState, mapDispatch)(Navbar)
  */
 Navbar.propTypes = {
   handleClick: PropTypes.func.isRequired,
-  isLoggedIn: PropTypes.bool.isRequired
+  isLoggedIn: PropTypes.bool.isRequired,
 }

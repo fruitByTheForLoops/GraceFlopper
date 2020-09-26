@@ -19,13 +19,22 @@ An e-commerce website built with [Boilermaker](https://github.com/FullstackAcade
 
 We sell seeds. Kind of like these folks in real life (IRL) at [Burpee](https://www.burpee.com/).
 
-## Getting started
+## Contributing Guidelines
 
-Expects you to create a backing resource, i.e. postgresql database `fruity-seeds` and `fruity-seeds-test`. So do this before running anything.
+We try to adhere to [Airbnb style suggestions](https://github.com/airbnb/javascript/tree/master/react) for our JavaScript and React components.
 
-You also need a [trefle.io](trefle.io) token in a secrets.js file. The secrets file should set environment variable `TREFLE_TOKEN` to a valid token.
+Git commits use [Semantic Commit Messages](https://seesparkbox.com/foundry/semantic_commit_messages) because even though gitmojis are fun, seeing `:sparkles:` in a git log doesn't always translate into understandable git commits.
 
-Make sure all the tests pass by running `npm run test`.
+### Up and Running on Your Local Machine
+
+- `git clone` the main branch
+- `npm install`
+- Expects you to create a backing resource, i.e. postgresql database `fruity-seeds` and `fruity-seeds-test`. So do this before running anything.
+  - e.g. `createdb fruity-seeds` and `createdb fruity-seeds-test` on your command line.
+- Run `touch secrets.js` to create a blank file with that name in the top-level directory, and stick a `process.env.TREFLE_TOKEN=<INSERT_YOUR_TOKEN_HERE>`. Get a token at [trefle.io](trefle.io) API token in a file named `secrets.js` file. The secrets file should set the environment variable `TREFLE_TOKEN`.
+- Make sure all the tests pass by running `npm run test`.
+- `git checkout <feature_branch_name>` to start hacking away.
+- Always commit and push to the central repo (origin) before walking away so others can build on your work!
 
 ---
 
