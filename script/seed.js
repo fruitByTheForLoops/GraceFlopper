@@ -19,8 +19,6 @@ async function seed() {
     }
   })
 
-  console.log(seeds[0])
-
   const fruitySeeds = await Promise.all(
     seeds.map((aseed) => FruitySeed.create(aseed))
   )
@@ -30,11 +28,13 @@ async function seed() {
     User.create({email: 'murphy@email.com', password: '123'}),
   ])
 
-  // await Promise.all(users.map((user) => (user.addCart(
-  //     {
-  //       checkedOut: false
-  //     })
-  //   )))
+  await Promise.all(
+    users.map((user) =>
+      user.createCart({
+        checkedOut: false,
+      })
+    )
+  )
 
   console.log(`seeded ${users.length} users`)
   console.log(`seeded ${fruitySeeds.length} seeds`)
