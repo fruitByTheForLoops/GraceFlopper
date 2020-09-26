@@ -36,7 +36,13 @@ Git commits use [Semantic Commit Messages](https://seesparkbox.com/foundry/seman
 - `git checkout <feature_branch_name>` to start hacking away.
 - Always commit and push to the central repo (origin) before walking away so others can build on your work!
 
----
+### Deploying
+
+#### Heroku
+
+- First, you need to be logged in and have the heroku CLI installed. Try `heroku login`. See [heroku CLI getting started](https://devcenter.heroku.com/articles/heroku-cli#getting-started).
+
+UNDER CONSTRUCTION...
 
 # Boilermaker README
 
