@@ -18,9 +18,9 @@ export const fetchCarts = (id) => async (dispatch) => {
   }
 }
 
-export const addedProductToServer = (id) => async (dispatch) => {
+export const addedItemToCart = (prodId) => async (dispatch) => {
   try {
-    const res = await axios.get(`/api/product/${id}`)
+    const res = await axios.get(`/api/products/${prodId}`)
     dispatch(addProduct(res.data))
   } catch (error) {
     console.error(error)
