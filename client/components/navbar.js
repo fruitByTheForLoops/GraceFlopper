@@ -7,7 +7,9 @@ import {logout} from '../store'
 const Navbar = ({handleClick, isLoggedIn}) => (
   <div>
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-      <div className="navbar-brand">GraceFlopper</div>
+      <div className="navbar-brand">
+        <img src="/GraceFlopper.png" height="50rem" width="200rem" />
+      </div>
       <button
         className="navbar-toggler"
         type="button"
