@@ -12,19 +12,20 @@ export class Carts extends Component {
 
   render() {
     // in render, map our fetched cart, and provide a conditional
+    console.log('this.props.carts --->', this.props.carts)
     if (!Array.isArray(this.props.carts)) {
       return <h3>Loading...</h3>
     }
-    console.log('this.props.carts --->', this.props.carts)
     return (
       <div>
         {this.props.carts.map((cart) => {
           if (!cart.checkedOut) {
-            //render with css styling from bootstrap (card)
-            cart.productsInCart.map((product) => (
-              <singleProductView product={product} />
-            ))
-            //delete button
+            // render with css styling from bootstrap (card)
+            return <h3>Carts here</h3>
+            // cart.productsInCart.map((product) => (
+            //   <singleProductView product={product} />
+            // ))
+            // delete button
           }
         })}
       </div>

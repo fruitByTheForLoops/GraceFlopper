@@ -9,7 +9,8 @@ export const getCarts = (carts) => ({type: GET_CARTS, carts})
 //THUNK CREATOR
 export const fetchCarts = (id) => async (dispatch) => {
   try {
-    const response = await axios.get(`/api/carts`, id)
+    const response = await axios.get(`/api/users/${id}/carts`)
+    console.log('response.data ---->', response.data)
     dispatch(getCarts(response.data))
   } catch (error) {
     console.error(error)
@@ -22,8 +23,8 @@ const initialState = {}
 //REDUCER
 export default function (state = initialState, action) {
   switch (action.type) {
-    case GET_PRODUCTS:
-      return action.products
+    case GET_CARTS:
+      return action.carts
     default:
       return state
   }
