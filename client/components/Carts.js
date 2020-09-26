@@ -7,11 +7,15 @@ export class Carts extends Component {
   // component did mount, fetch of carts
   componentDidMount() {
     this.props.fetchInitialCarts(this.props.id)
+    console.log('this.props.id --->', this.props.id)
   }
 
   render() {
     // in render, map our fetched cart, and provide a conditional
-
+    if (!Array.isArray(this.props.carts)) {
+      return <h3>Loading...</h3>
+    }
+    console.log('this.props.carts --->', this.props.carts)
     return (
       <div>
         {this.props.carts.map((cart) => {
@@ -39,7 +43,7 @@ const mapState = (state) => {
 
 const mapDispatch = (dispatch) => {
   return {
-    fetchInitialCarts: () => dispatch(fetchCarts()),
+    fetchInitialCarts: (id) => dispatch(fetchCarts(id)),
   }
 }
 

@@ -9,6 +9,7 @@ import {
   LandingPage,
   NoneFound,
   Products,
+  Carts,
 } from './components'
 import {me} from './store'
 
@@ -29,6 +30,7 @@ class Routes extends Component {
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
         <Route path="/shop" component={Products} />
+        <Route path="/cart" component={Carts} />
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}

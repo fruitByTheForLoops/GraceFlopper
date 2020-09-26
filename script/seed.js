@@ -28,11 +28,13 @@ async function seed() {
     User.create({email: 'murphy@email.com', password: '123'}),
   ])
 
-  // await Promise.all(users.map((user) => (user.addCart(
-  //     {
-  //       checkedOut: false
-  //     })
-  //   )))
+  await Promise.all(
+    users.map((user) =>
+      user.createCart({
+        checkedOut: false,
+      })
+    )
+  )
 
   console.log(`seeded ${users.length} users`)
   console.log(`seeded ${fruitySeeds.length} seeds`)
