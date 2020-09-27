@@ -7,7 +7,11 @@ const ATTEMPTED_AUTH = 'ATTEMPTED_AUTH'
 
 //ACTION CREATOR
 export const getCarts = (carts) => ({type: GET_CARTS, carts})
-export const addProduct = (product) => ({type: ADD_PRODUCT, product})
+export const addProduct = (product, quantity) => ({
+  type: ADD_PRODUCT,
+  product,
+  quantity,
+})
 
 //THUNK CREATOR
 // TODO: Reevaluate whether this thunk is needed
@@ -28,7 +32,7 @@ export const addedItemToCart = (userId, prodId, quantity) => async (
     if (userId !== null) {
       await axios.put('/api/products/add', {userId, prodId, quantity})
     }
-    dispatch(addProduct(product))
+    dispatch(addProduct(product, quantity))
   } catch (error) {
     console.error(error)
   }
@@ -37,7 +41,7 @@ export const addedItemToCart = (userId, prodId, quantity) => async (
 //INITIAL STATE
 const initialState = {
   pastOrders: [],
-  activeCart: {id: '', fruityseeds: []},
+  activeCart: {id: '', fruityseeds: {}},
 }
 
 //REDUCER
@@ -56,10 +60,27 @@ export default function (state = initialState, action) {
     //   )[0]
     //   return {pastOrders, activeCart}
     case ADD_PRODUCT:
-      const newActiveCart = {
-        ...state.activeCart,
-        fruityseeds: [...state.activeCart.fruityseeds, action.product],
+      var productId = action.product.id.toString()
+      var existingEntry = state.activeCart.fruityseeds[productId]
+      console.log('Existing entry -->', existingEntry)
+      var cartEntry
+      if (existingEntry) {
+        var previousQuantity = existingEntry.cartSeed.quantity
+        cartEntry = {
+          cartSeed: {quantity: previousQuantity + action.quantity},
+          product: action.product,
+        }
+      } else {
+        cartEntry = {
+          cartSeed: {quantity: action.quantity},
+          product: action.product,
+        }
       }
+      var newActiveCart = {
+        ...state.activeCart,
+        fruityseeds: {...state.activeCart.fruityseeds},
+      }
+      newActiveCart.fruityseeds[productId] = cartEntry
       return {
         ...state,
         activeCart: newActiveCart,

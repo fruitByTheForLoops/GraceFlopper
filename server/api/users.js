@@ -19,7 +19,7 @@ router.get('/', async (req, res, next) => {
 router.get('/:userId/carts', async (req, res, next) => {
   const userId = req.params.userId
   try {
-    const carts = await Cart.findAll({
+    let carts = await Cart.findAll({
       where: {
         userId,
       },
@@ -37,6 +37,15 @@ router.get('/:userId/carts', async (req, res, next) => {
       carts.push(newEmptyCart)
     }
 
+    carts = carts.map((cart) => {
+      cart = cart.toJSON()
+      const fruityseeds = {}
+      cart.fruityseeds.forEach((fruityseed) => {
+        fruityseeds[fruityseed.id] = fruityseed
+      })
+      cart.fruityseeds = fruityseeds
+      return cart
+    })
     res.send(carts)
   } catch (error) {
     next(error)
