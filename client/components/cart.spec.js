@@ -40,8 +40,8 @@ describe('Carts', () => {
     // aCart = shallow(<Carts carts={carts} />)
   })
 
-  it('fetches only the carts associated with a given user id', () => {})
-  it('there is only one ACTIVE cart for a given user', () => {})
-  it('render all the items in the ACTIVE cart for a given user', () => {})
+  it('fetches only the carts associated with a given user id')
+  it('there is only one ACTIVE cart for a given user')
+  it('render all the items in the ACTIVE cart for a given user')
   it('renders carts with checkedOut=true as previous orders')
 })
