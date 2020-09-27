@@ -23,6 +23,7 @@ const removeUser = () => ({type: REMOVE_USER})
  * THUNK CREATORS
  */
 export const me = () => async (dispatch) => {
+  let carts
   try {
     let res = await axios.get('/auth/me')
     if (res.data) {
@@ -30,7 +31,7 @@ export const me = () => async (dispatch) => {
       res = await axios.get(`/api/users/${loggedInUser.id}/carts`)
       carts = res.data
     }
-    dispatch(getUser(res.data || defaultUser, defaultCarts))
+    dispatch(getUser(res.data || defaultUser, carts || defaultCarts))
   } catch (err) {
     console.error(err)
   }
