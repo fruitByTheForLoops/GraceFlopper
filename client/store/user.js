@@ -4,49 +4,59 @@ import history from '../history'
 /**
  * ACTION TYPES
  */
-const GET_USER = 'GET_USER'
+const ATTEMPTED_AUTH = 'ATTEMPTED_AUTH'
 const REMOVE_USER = 'REMOVE_USER'
 
 /**
  * INITIAL STATE
  */
 const defaultUser = {}
+const defaultCarts = [{id: '', fruityseeds: [], checkedOut: false}]
 
 /**
  * ACTION CREATORS
  */
-const getUser = user => ({type: GET_USER, user})
+const getUser = (user, carts) => ({type: ATTEMPTED_AUTH, user, carts})
 const removeUser = () => ({type: REMOVE_USER})
 
 /**
  * THUNK CREATORS
  */
-export const me = () => async dispatch => {
+export const me = () => async (dispatch) => {
+  let carts
   try {
-    const res = await axios.get('/auth/me')
-    dispatch(getUser(res.data || defaultUser))
+    let res = await axios.get('/auth/me')
+    if (res.data) {
+      const loggedInUser = res.data
+      res = await axios.get(`/api/users/${loggedInUser.id}/carts`)
+      carts = res.data
+    }
+    dispatch(getUser(res.data || defaultUser, carts || defaultCarts))
   } catch (err) {
     console.error(err)
   }
 }
 
-export const auth = (email, password, method) => async dispatch => {
+export const auth = (email, password, method) => async (dispatch) => {
   let res
   try {
     res = await axios.post(`/auth/${method}`, {email, password})
   } catch (authError) {
-    return dispatch(getUser({error: authError}))
+    return dispatch(getUser({error: authError}, defaultCarts))
   }
 
   try {
-    dispatch(getUser(res.data))
+    const user = res.data
+    res = await axios.get(`/api/users/${user.id}/carts`)
+    const carts = res.data
+    dispatch(getUser(user, carts))
     history.push('/home')
   } catch (dispatchOrHistoryErr) {
     console.error(dispatchOrHistoryErr)
   }
 }
 
-export const logout = () => async dispatch => {
+export const logout = () => async (dispatch) => {
   try {
     await axios.post('/auth/logout')
     dispatch(removeUser())
@@ -59,9 +69,9 @@ export const logout = () => async dispatch => {
 /**
  * REDUCER
  */
-export default function(state = defaultUser, action) {
+export default function (state = defaultUser, action) {
   switch (action.type) {
-    case GET_USER:
+    case ATTEMPTED_AUTH:
       return action.user
     case REMOVE_USER:
       return defaultUser
