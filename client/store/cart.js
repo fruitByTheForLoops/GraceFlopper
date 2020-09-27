@@ -18,11 +18,13 @@ export const fetchCarts = (id) => async (dispatch) => {
   }
 }
 
-export const addedItemToCart = (userId, prodId) => async (dispatch) => {
+export const addedItemToCart = (userId, prodId, quantity) => async (
+  dispatch
+) => {
   try {
     const {data: product} = await axios.get(`/api/products/${prodId}`)
     if (userId) {
-      await axios.put('/api/products/add', {userId, prodId})
+      await axios.put('/api/products/add', {userId, prodId, quantity})
     }
     dispatch(addProduct(product))
   } catch (error) {
