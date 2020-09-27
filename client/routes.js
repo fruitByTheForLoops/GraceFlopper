@@ -11,14 +11,23 @@ import {
   Products,
   Carts,
 } from './components'
-import {me} from './store'
+import {me, addedItemToCart} from './store'
 
 /**
  * COMPONENT
  */
 class Routes extends Component {
+  constructor() {
+    super()
+    this.handleAddToCart = this.handleAddToCart.bind(this)
+  }
+
   componentDidMount() {
     this.props.loadInitialData()
+  }
+
+  handleAddToCart(evt) {
+    this.props.addItem(evt.target.value)
   }
 
   render() {
@@ -29,7 +38,10 @@ class Routes extends Component {
         {/* Routes placed here are available to all visitors */}
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
-        <Route path="/shop" component={Products} />
+        <Route
+          path="/shop"
+          render={() => <Products addItem={this.handleAddToCart} />}
+        />
         <Route path="/cart" component={Carts} />
         {isLoggedIn && (
           <Switch>
@@ -63,6 +75,7 @@ const mapDispatch = (dispatch) => {
     loadInitialData() {
       dispatch(me())
     },
+    addItem: (prodId) => dispatch(addedItemToCart(prodId)),
   }
 }
 

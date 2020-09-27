@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {User, Cart} = require('../db/models')
+const {User, Cart, FruitySeed} = require('../db/models')
 module.exports = router
 
 router.get('/', async (req, res, next) => {
@@ -22,6 +22,7 @@ router.get('/:userId/carts', async (req, res, next) => {
       where: {
         userId: req.params.userId,
       },
+      include: FruitySeed,
     })
     res.send(carts)
   } catch (error) {

@@ -7,8 +7,9 @@ export class Products extends Component {
   componentDidMount() {
     this.props.fetch()
   }
+
   render() {
-    const products = this.props.products
+    const {products, addItem} = this.props
     return (
       <div>
         <nav aria-label="breadcrumb">
@@ -38,7 +39,12 @@ export class Products extends Component {
                   <h6>
                     {product.seedsPerUnit} seeds / {product.unit}
                   </h6>
-                  <button className="add-to-cart-button" type="button">
+                  <button
+                    className="add-to-cart-button"
+                    type="button"
+                    value={product.id}
+                    onClick={addItem}
+                  >
                     Add To Cart
                   </button>
                 </div>

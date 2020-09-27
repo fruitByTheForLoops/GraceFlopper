@@ -22,3 +22,21 @@ router.get('/', async (req, res, next) => {
     next(err)
   }
 })
+
+router.get('/:prodId', async (req, res, next) => {
+  try {
+    const product = await FruitySeed.findByPk(req.params.prodId, {
+      attributes: [
+        'id',
+        'name',
+        'pricePerUnit',
+        'imageUrl',
+        'seedsPerUnit',
+        'unit',
+      ],
+    })
+    res.json(product)
+  } catch (error) {
+    next(error)
+  }
+})
