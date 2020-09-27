@@ -1,10 +1,10 @@
 # Grace Flopper
 
-An e-commerce website built with [Boilermaker](https://github.com/FullstackAcademy/boilermaker).
+An e-commerce website built with [Boilermaker](https://github.com/FullstackAcademy/boilermaker) and uses [trefle.io](trefle.io).
 
 ## Features
 
-- [User specs](https://gist.github.com/Julissa93/6c922a128d4add4b2a9a947b5d4939c3)
+- [UX Requirements (User specs)](https://gist.github.com/Julissa93/6c922a128d4add4b2a9a947b5d4939c3)
 
 ### Advanced Feature Ideas
 
