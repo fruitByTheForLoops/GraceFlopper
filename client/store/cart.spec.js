@@ -33,11 +33,11 @@ describe('thunk creators', () => {
       const fakeCarts = []
       mockAxios.onGet('/api/users/1/carts').replyOnce(200, fakeCarts)
       await store.dispatch(fetchCarts(1))
-      console.log('mock store state', store.getState())
       const actions = store.getActions()
-      console.log('actions --> ', actions)
-      expect(actions[0].type).to.be.equal('GET_CARTS')
-      expect(actions[0].carts).to.be.deep.equal(fakeCarts)
+      const theDispatchedAction = actions[0]
+
+      expect(theDispatchedAction.type).to.be.equal('GET_CARTS')
+      expect(theDispatchedAction.carts).to.be.deep.equal(fakeCarts)
     })
   })
 })
