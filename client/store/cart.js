@@ -25,7 +25,7 @@ export const addedItemToCart = (userId, prodId, quantity) => async (
 ) => {
   try {
     const {data: product} = await axios.get(`/api/products/${prodId}`)
-    if (userId) {
+    if (userId !== null) {
       await axios.put('/api/products/add', {userId, prodId, quantity})
     }
     dispatch(addProduct(product))
