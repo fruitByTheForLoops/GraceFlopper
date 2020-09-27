@@ -17,13 +17,26 @@ router.get('/', async (req, res, next) => {
 })
 
 router.get('/:userId/carts', async (req, res, next) => {
+  const userId = req.params.userId
   try {
     const carts = await Cart.findAll({
       where: {
-        userId: req.params.userId,
+        userId,
       },
       include: FruitySeed,
     })
+
+    // TODO: Write test to ensure that this
+    // route always returns a non-empty array
+    // create an empty cart if the user does not have any
+    if (carts.length === 0) {
+      const newEmptyCart = await Cart.create({
+        checkedOut: false,
+        userId,
+      })
+      carts.push(newEmptyCart)
+    }
+
     res.send(carts)
   } catch (error) {
     next(error)
