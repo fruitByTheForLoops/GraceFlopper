@@ -36,6 +36,8 @@ describe('thunk creators', () => {
       expect(actions[0].type).to.be.equal('GET_USER')
       expect(actions[0].user).to.be.deep.equal(fakeUser)
     })
+
+    it('also gets an array of carts along with the user')
   })
 
   describe('logout', () => {

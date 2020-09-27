@@ -10,6 +10,11 @@ import thunkMiddleware from 'redux-thunk'
 const middlewares = [thunkMiddleware]
 const mockStore = configureMockStore(middlewares)
 
+/* TEST INITIAL STATE */
+describe('the initial cart state', () => {
+  it('logged in users always have an active cart with a valid ID')
+})
+
 /* TEST THUNK CREATORS */
 describe('thunk creators', () => {
   let store
