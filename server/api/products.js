@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {FruitySeed} = require('../db/models')
+const {FruitySeed, Cart, CartSeed} = require('../db/models')
 module.exports = router
 
 router.get('/', async (req, res, next) => {
@@ -36,6 +36,32 @@ router.get('/:prodId', async (req, res, next) => {
       ],
     })
     res.json(product)
+  } catch (error) {
+    next(error)
+  }
+})
+
+router.put('/add', async (req, res, next) => {
+  try {
+    const {userId, prodId, quantity} = req.body
+    const activeCart = await Cart.findOne({
+      where: {
+        userId,
+        checkedOut: false,
+      },
+    })
+    const product = await FruitySeed.findByPk(prodId)
+    await activeCart.addFruityseed(product)
+    await CartSeed.update(
+      {quantity},
+      {
+        where: {
+          cartId: activeCart.id,
+          fruityseedId: prodId,
+        },
+      }
+    )
+    res.sendStatus(204)
   } catch (error) {
     next(error)
   }

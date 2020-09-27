@@ -46,4 +46,8 @@ describe('all products route', () => {
       expect(res.body[0].pricePerUnit).to.be.equal(395)
     })
   })
+
+  describe('PUT /api/products/add', () => {
+    it('updates the quantity of a given product in a given users active cart')
+  })
 })

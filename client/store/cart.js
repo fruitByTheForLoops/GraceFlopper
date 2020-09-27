@@ -20,10 +20,15 @@ export const fetchCarts = (id) => async (dispatch) => {
   }
 }
 
-export const addedItemToCart = (prodId) => async (dispatch) => {
+export const addedItemToCart = (userId, prodId, quantity) => async (
+  dispatch
+) => {
   try {
-    const res = await axios.get(`/api/products/${prodId}`)
-    dispatch(addProduct(res.data))
+    const {data: product} = await axios.get(`/api/products/${prodId}`)
+    if (userId !== null) {
+      await axios.put('/api/products/add', {userId, prodId, quantity})
+    }
+    dispatch(addProduct(product))
   } catch (error) {
     console.error(error)
   }
