@@ -3,12 +3,14 @@ import axios from 'axios'
 //ACTION TYPES
 const GET_CARTS = 'GET_CARTS'
 const ADD_PRODUCT = 'ADD_PRODUCT'
+const ATTEMPTED_AUTH = 'ATTEMPTED_AUTH'
 
 //ACTION CREATOR
 export const getCarts = (carts) => ({type: GET_CARTS, carts})
 export const addProduct = (product) => ({type: ADD_PRODUCT, product})
 
 //THUNK CREATOR
+// TODO: Reevaluate whether this thunk is needed
 export const fetchCarts = (id) => async (dispatch) => {
   try {
     const response = await axios.get(`/api/users/${id}/carts`)
@@ -35,18 +37,24 @@ export const addedItemToCart = (userId, prodId, quantity) => async (
 //INITIAL STATE
 const initialState = {
   pastOrders: [],
-  activeCart: {fruityseeds: []},
+  activeCart: {id: '', fruityseeds: []},
 }
 
 //REDUCER
 export default function (state = initialState, action) {
   switch (action.type) {
-    case GET_CARTS:
-      const pastOrders = action.carts.filter((cart) => cart.checkedOut === true)
-      const activeCart = action.carts.filter(
+    case ATTEMPTED_AUTH:
+      var pastOrders = action.carts.filter((cart) => cart.checkedOut === true)
+      var activeCart = action.carts.filter(
         (cart) => cart.checkedOut === false
       )[0]
       return {pastOrders, activeCart}
+    // case GET_CARTS:
+    //   var pastOrders = action.carts.filter((cart) => cart.checkedOut === true)
+    //   var activeCart = action.carts.filter(
+    //     (cart) => cart.checkedOut === false
+    //   )[0]
+    //   return {pastOrders, activeCart}
     case ADD_PRODUCT:
       const newActiveCart = {
         ...state.activeCart,

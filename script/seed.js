@@ -29,11 +29,18 @@ async function seed() {
   ])
 
   await Promise.all(
-    users.map((user) =>
-      user.createCart({
-        checkedOut: false,
-      })
-    )
+    // create a cart only for even IDs
+    // this way, some users do not have a cart
+    users.map((user) => {
+      if (user.id % 2 === 0) {
+        console.log(`created a cart for user ${user.id}`)
+        return user.createCart({
+          checkedOut: false,
+        })
+      } else {
+        return Promise.resolve()
+      }
+    })
   )
 
   console.log(`seeded ${users.length} users`)
