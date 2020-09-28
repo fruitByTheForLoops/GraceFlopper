@@ -49,7 +49,9 @@ class Routes extends Component {
         />
         <Route
           path="/shop/:prodId"
-          render={() => <SingleProduct addItem={this.handleAddToCart} />}
+          render={(props) => (
+            <SingleProduct {...props} addItem={this.handleAddToCart} />
+          )}
         />
         <Route path="/cart" component={Carts} />
         {isLoggedIn && (
