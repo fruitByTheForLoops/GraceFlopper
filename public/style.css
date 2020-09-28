@@ -69,3 +69,12 @@ form div {
   margin: 10px;
   width: 240px;
 }
+
+.media {
+  margin: 20px;
+}
+
+.mr-3 {
+  width: 30rem;
+  height: 30rem;
+}

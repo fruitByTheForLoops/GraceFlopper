@@ -32,7 +32,7 @@ export const fetchSingleProduct = (prodId) => async (dispatch) => {
 
 //INITIAL STATE
 const initialState = {
-  allProducts: [],
+  allProducts: {},
   singleProduct: {},
 }
 
