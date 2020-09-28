@@ -52,15 +52,18 @@ router.put('/add', async (req, res, next) => {
     })
     const product = await FruitySeed.findByPk(prodId)
     await activeCart.addFruityseed(product)
-    await CartSeed.update(
-      {quantity},
-      {
-        where: {
-          cartId: activeCart.id,
-          fruityseedId: prodId,
-        },
-      }
-    )
+    const cartSeedInstance = await CartSeed.findOne({
+      where: {
+        cartId: activeCart.id,
+        fruityseedId: prodId,
+      },
+    })
+
+    await cartSeedInstance.increment({
+      quantity: quantity,
+    })
+    //await cartSeedInstance.save()
+    //may need to save
     res.sendStatus(204)
   } catch (error) {
     next(error)
