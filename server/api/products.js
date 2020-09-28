@@ -1,5 +1,6 @@
 const router = require('express').Router()
 const {FruitySeed, Cart, CartSeed} = require('../db/models')
+const isAdmin = require('../isAdmin')
 module.exports = router
 
 router.get('/', async (req, res, next) => {
@@ -41,6 +42,20 @@ router.get('/:prodId', async (req, res, next) => {
   }
 })
 
+// ADMIN should have the ability to change products
+router.post('/', isAdmin, async (req, res, next) => {
+  res.send(req.body)
+})
+
+router.put('/:id', isAdmin, async (req, res, next) => {
+  res.send(req.params.id)
+})
+
+router.delete('/:id', isAdmin, async (req, res, next) => {
+  res.send(req.params.id)
+})
+
+// This route needs to be refactored
 router.put('/add', async (req, res, next) => {
   try {
     const {userId, prodId, quantity} = req.body
