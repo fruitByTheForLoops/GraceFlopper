@@ -67,13 +67,13 @@ export default function (state = initialState, action) {
       if (existingEntry) {
         var previousQuantity = existingEntry.cartSeed.quantity
         cartEntry = {
+          ...action.product,
           cartSeed: {quantity: previousQuantity + action.quantity},
-          product: action.product,
         }
       } else {
         cartEntry = {
+          ...action.product,
           cartSeed: {quantity: action.quantity},
-          product: action.product,
         }
       }
       var newActiveCart = {
