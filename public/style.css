@@ -70,6 +70,7 @@ form div {
   width: 240px;
 }
 
+
 .cart-view {
   display: flex;
   flex-direction: row;
@@ -78,4 +79,12 @@ form div {
 .item-thumbnail {
   display: flex;
   flex-direction: row;
+
+.media {
+  margin: 20px;
+}
+
+.mr-3 {
+  width: 30rem;
+  height: 30rem;
 }

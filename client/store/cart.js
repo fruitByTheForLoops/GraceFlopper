@@ -46,26 +46,24 @@ const initialState = {
 
 //REDUCER
 export default function (state = initialState, action) {
+  let pastOrders
+  let activeCart
+  let productId
+  let existingEntry
+  let cartEntry
+  let previousQuantity
+  let newActiveCart
   switch (action.type) {
     case ATTEMPTED_AUTH:
-      var pastOrders = action.carts.filter((cart) => cart.checkedOut === true)
-      var activeCart = action.carts.filter(
-        (cart) => cart.checkedOut === false
-      )[0]
+      pastOrders = action.carts.filter((cart) => cart.checkedOut === true)
+      activeCart = action.carts.filter((cart) => cart.checkedOut === false)[0]
       return {pastOrders, activeCart}
-    // case GET_CARTS:
-    //   var pastOrders = action.carts.filter((cart) => cart.checkedOut === true)
-    //   var activeCart = action.carts.filter(
-    //     (cart) => cart.checkedOut === false
-    //   )[0]
-    //   return {pastOrders, activeCart}
     case ADD_PRODUCT:
-      var productId = action.product.id.toString()
-      var existingEntry = state.activeCart.fruityseeds[productId]
+      productId = action.product.id.toString()
+      existingEntry = state.activeCart.fruityseeds[productId]
       console.log('Existing entry -->', existingEntry)
-      var cartEntry
       if (existingEntry) {
-        var previousQuantity = existingEntry.cartSeed.quantity
+        previousQuantity = existingEntry.cartSeed.quantity
         cartEntry = {
           ...action.product,
           cartSeed: {quantity: previousQuantity + action.quantity},
@@ -76,7 +74,7 @@ export default function (state = initialState, action) {
           cartSeed: {quantity: action.quantity},
         }
       }
-      var newActiveCart = {
+      newActiveCart = {
         ...state.activeCart,
         fruityseeds: {...state.activeCart.fruityseeds},
       }

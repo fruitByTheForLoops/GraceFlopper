@@ -10,6 +10,7 @@ import {
   NoneFound,
   Products,
   Carts,
+  SingleProduct,
 } from './components'
 import {me, addedItemToCart} from './store'
 
@@ -42,8 +43,15 @@ class Routes extends Component {
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
         <Route
+          exact
           path="/shop"
           render={() => <Products addItem={this.handleAddToCart} />}
+        />
+        <Route
+          path="/shop/:prodId"
+          render={(props) => (
+            <SingleProduct {...props} addItem={this.handleAddToCart} />
+          )}
         />
         <Route path="/cart" component={Carts} />
         {isLoggedIn && (
