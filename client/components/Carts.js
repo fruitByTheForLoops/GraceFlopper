@@ -1,5 +1,5 @@
 import {connect} from 'react-redux'
-import {fetchCarts, updatedCartToServer} from '../store/index.js'
+import {fetchCarts, updatedCartToServer, updateCart} from '../store/index.js'
 
 import React, {Component} from 'react'
 
@@ -11,8 +11,12 @@ export class Carts extends Component {
   // component did mount, fetch of carts
   handleClick(ev) {
     ev.preventDefault()
-    const cartId = ev.target.value
-    this.props.updateCheckout(cartId)
+    if (this.props.id) {
+      const cartId = ev.target.value
+      this.props.updateCheckout(cartId)
+    } else {
+      this.props.updateCart()
+    }
   }
   render() {
     // in render, map our fetched cart, and provide a conditional
@@ -113,6 +117,7 @@ const mapDispatch = (dispatch) => {
   return {
     fetchInitialCarts: (id) => dispatch(fetchCarts(id)),
     updateCheckout: (cartId) => dispatch(updatedCartToServer(cartId)),
+    updateCart: () => dispatch(updateCart()),
   }
 }
 
