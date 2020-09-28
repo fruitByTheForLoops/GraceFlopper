@@ -69,3 +69,13 @@ form div {
   margin: 10px;
   width: 240px;
 }
+
+.cart-view {
+  display: flex;
+  flex-direction: row;
+}
+
+.item-thumbnail {
+  display: flex;
+  flex-direction: row;
+}
