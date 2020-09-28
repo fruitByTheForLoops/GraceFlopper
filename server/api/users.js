@@ -20,6 +20,20 @@ router.get('/', isAdmin, async (req, res, next) => {
 router.get('/:userId/carts', async (req, res, next) => {
   const userId = req.params.userId
   try {
+    // REMOVE THE CONSOLE LOGS BELOW BEFORE MERGING INTO MAIN
+    console.log('is not undefined --> ', req.user.id !== undefined)
+    console.log('The User ID --> ', req.user.id)
+    console.log('The Params userId -->', req.params.userId)
+    console.log('Is Allowed --> ', req.user.id === Number(req.params.userId))
+    const requestingUser = req.user.id
+    const requestedResourceUserId = Number(req.params.userId)
+    if (requestingUser !== requestedResourceUserId) {
+      console.log('Do I get here?')
+      const error = new Error('Insufficient Privileges')
+      error.status = 401
+      throw error
+    }
+
     let carts = await Cart.findAll({
       where: {
         userId,
