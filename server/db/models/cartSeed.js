@@ -4,6 +4,7 @@ const db = require('../db')
 const CartSeed = db.define('cartSeed', {
   quantity: {
     type: Sequelize.INTEGER,
+    defaultValue: 0,
   },
 })
 
