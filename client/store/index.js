@@ -6,6 +6,33 @@ import user from './user'
 import products from './products'
 import carts from './cart'
 
+// Redux State
+// {
+//   user: {
+//     id: 0
+//   },
+//   carts: {
+//     activeCart: {
+//       checkedOut: false,
+//       items: {
+//         productId: quantity
+//       }
+//     }
+//     pastOrders: []
+//   },
+//   products: [
+//     {
+//       id:,
+//       name:,
+//       pricePerUnit:,
+//       seedsPerUnit:,
+//       unit:,
+//       stock:,
+//       image:Url:,
+//     }
+//   ]
+// }
+
 const reducer = combineReducers({user, products, carts})
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
