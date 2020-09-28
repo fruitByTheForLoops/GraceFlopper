@@ -60,7 +60,7 @@ export class Products extends Component {
 }
 
 const mapState = (state) => ({
-  products: state.products,
+  products: state.products.allProducts,
 })
 
 const mapDispatch = (dispatch) => ({
