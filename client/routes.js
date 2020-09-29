@@ -11,6 +11,7 @@ import {
   Products,
   Carts,
   SingleProduct,
+  Confirmation,
 } from './components'
 import {me, addedItemToCart} from './store'
 
@@ -62,6 +63,7 @@ class Routes extends Component {
             <Route component={NoneFound} />
           </Switch>
         )}
+        <Route path="/confirmation" component={Confirmation} />
         <Route exact path="/" component={LandingPage} />
         {/* Displays our NoneFound component as a fallback */}
         <Route component={NoneFound} />
