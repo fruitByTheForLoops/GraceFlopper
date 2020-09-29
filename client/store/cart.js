@@ -14,8 +14,9 @@ export const addProduct = (product, quantity) => ({
   quantity,
 })
 export const updateCart = () => ({type: UPDATE_CART})
-export const deleteProduct = () => ({
+export const deleteProduct = (prodId) => ({
   type: DELETE_PRODUCT,
+  prodId,
 })
 //THUNK CREATOR
 // TODO: Reevaluate whether this thunk is needed
@@ -112,6 +113,11 @@ export default function (state = initialState, action) {
         activeCart: initialState.activeCart,
       }
     }
+    case DELETE_PRODUCT:
+      const newItems = {...state.activeCart.fruityseeds}
+      delete newItems[action.prodId]
+      newActiveCart = {...state.activeCart, fruityseeds: newItems}
+      return {...state, activeCart: newActiveCart}
     default:
       return state
   }

@@ -40,11 +40,11 @@ router.put('/add', async (req, res, next) => {
   }
 })
 
-router.put(':cartId/delete-product/', async (req, res, next) => {
+router.put('/:cartId/delete-product/', async (req, res, next) => {
   try {
     const {prodId} = req.body
     const cartId = req.params.cartId
-    await CartSeed.destory({
+    await CartSeed.destroy({
       where: {
         cartId,
         fruityseedId: prodId,
