@@ -94,3 +94,26 @@ form div {
   text-align: center;
   margin: 50px;
 }
+
+.checkout-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.checkout-details {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin: 50px;
+}
+
+.checkbox:checked ~ .billing-address-form {
+  visibility: hidden;
+  opacity: 0;
+}
+
+.place-order-button {
+  width: 200px;
+  align-self: center;
+}
