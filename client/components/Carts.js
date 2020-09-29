@@ -4,6 +4,7 @@ import {
   deleteProduct,
   addedItemToCart,
 } from '../store/index.js'
+import {Link} from 'react-router-dom'
 
 import React, {Component} from 'react'
 
@@ -116,20 +117,18 @@ export class Carts extends Component {
           <div className="cart-total">
             <div className="cart-total-subtotal">
               <table className="cart-subtotal-total">
-                <tr>
-                  <td>Subtotal</td>
-                  <td>$</td>
-                </tr>
+                <tbody>
+                  <tr>
+                    <td>Subtotal</td>
+                    <td>$</td>
+                  </tr>
+                </tbody>
               </table>
             </div>
             <div className="cart-proceed-checkout">
-              <button
-                type="button"
-                // value={this.props.carts.activeCart.id}
-                onClick={this.handleClick}
-              >
-                Check Out
-              </button>
+              <Link to="/checkout">
+                <button type="button">Proceed to Checkout</button>
+              </Link>
             </div>
           </div>
         </div>

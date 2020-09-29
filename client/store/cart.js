@@ -12,17 +12,36 @@ export const addProduct = (product, quantity) => ({
   product,
   quantity,
 })
-export const updateCart = () => ({type: UPDATE_CART})
+export const updateCart = (newActiveCart) => ({
+  type: UPDATE_CART,
+  newActiveCart,
+})
 export const deleteProduct = (prodId) => ({
   type: DELETE_PRODUCT,
   prodId,
 })
 
+//INITIAL STATE
+const initialState = {
+  pastOrders: [],
+  activeCart: {id: '', fruityseeds: {}},
+}
+
 //THUNK CREATOR
-export const updatedCartToServer = (cartId) => async (dispatch) => {
+// TODO: Reevaluate whether this thunk is needed
+export const fetchCarts = (id) => async (dispatch) => {
   try {
-    await axios.put(`/api/carts/${cartId}`)
-    dispatch(updateCart())
+    const response = await axios.get(`/api/users/${id}/carts`)
+    dispatch(getCarts(response.data))
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+export const updatedCartToServer = (cartId) => async (dispatch, getState) => {
+  try {
+    const res = await axios.put(`/api/carts/${cartId}`)
+    dispatch(updateCart(res.data))
     //api request to update the backend cart, by cartId, to update checkout to true
     //we will then update in the front end pastOrders with action.type, and change activeCart.fruitySeeds to empty
   } catch (error) {
@@ -49,12 +68,6 @@ export const deleteItemInCart = (cartId, prodId) => async (dispatch) => {
   } catch (error) {
     console.error(error)
   }
-}
-
-//INITIAL STATE
-const initialState = {
-  pastOrders: [],
-  activeCart: {id: '', fruityseeds: {}},
 }
 
 //REDUCER
@@ -98,17 +111,28 @@ export default function (state = initialState, action) {
       }
     case UPDATE_CART: {
       const checkedOutCart = {...state.activeCart, checkedOut: true}
-      return {
-        ...state,
-        pastOrders: [...state.pastOrders, checkedOutCart],
-        activeCart: initialState.activeCart,
+      if (action.newActiveCart) {
+        // LOGGED IN USERS
+        return {
+          ...state,
+          pastOrders: [...state.pastOrders, checkedOutCart],
+          activeCart: {id: action.newActiveCart.id, fruityseeds: {}},
+        }
+      } else {
+        // GUEST
+        return {
+          ...state,
+          pastOrders: [...state.pastOrders, checkedOutCart],
+          activeCart: initialState.activeCart,
+        }
       }
     }
-    case DELETE_PRODUCT:
+    case DELETE_PRODUCT: {
       const newItems = {...state.activeCart.fruityseeds}
       delete newItems[action.prodId]
       newActiveCart = {...state.activeCart, fruityseeds: newItems}
       return {...state, activeCart: newActiveCart}
+    }
     default:
       return state
   }

@@ -113,6 +113,7 @@ router.put('/:id/delete-product/', async (req, res, next) => {
 router.put('/:id', async (req, res, next) => {
   // protect here
   try {
+
     const id = req.params.id
     const cart = await Cart.findOne({where: {id}})
     const userId = cart.userId
@@ -128,18 +129,19 @@ router.put('/:id', async (req, res, next) => {
       throw error
     }
 
-    // There is no use of the req.body here
-    await Cart.update(
+    const [n, updatedCart] = await Cart.update(
       {checkedOut: true},
       {
         where: {
           id,
         },
+        returning: true,
       }
     )
-    let updatedCart = await Cart.findByPk(req.params.id)
-    console.log(updatedCart)
-    res.send(updatedCart)
+    const userId = updatedCart[0].getDataValue('userId')
+    const newActiveCart = await Cart.create()
+    await newActiveCart.setUser(userId)
+    res.send(newActiveCart)
   } catch (error) {
     next(error)
   }
