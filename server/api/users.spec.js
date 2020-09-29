@@ -11,19 +11,19 @@ describe('User routes', () => {
     return db.sync({force: true})
   })
 
-  describe('/api/users/', () => {
+  describe('GET /api/users', () => {
     const codysEmail = 'cody@puppybook.com'
 
     beforeEach(() => {
       return User.create({
-        email: codysEmail
+        email: codysEmail,
       })
     })
 
-    it('GET /api/users', async () => {
-      const res = await request(app)
-        .get('/api/users')
-        .expect(200)
+    it('checks for administrator status')
+
+    it('returns an array of users', async () => {
+      const res = await request(app).get('/api/users').expect(200)
 
       expect(res.body).to.be.an('array')
       expect(res.body[0].email).to.be.equal(codysEmail)

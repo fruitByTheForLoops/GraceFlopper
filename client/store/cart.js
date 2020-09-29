@@ -1,13 +1,12 @@
 import axios from 'axios'
 
 //ACTION TYPES
-const GET_CARTS = 'GET_CARTS'
 const ADD_PRODUCT = 'ADD_PRODUCT'
 const ATTEMPTED_AUTH = 'ATTEMPTED_AUTH'
 const UPDATE_CART = 'UPDATE_CART'
 const DELETE_PRODUCT = 'DELETE_PRODUCT'
+
 //ACTION CREATOR
-export const getCarts = (carts) => ({type: GET_CARTS, carts})
 export const addProduct = (product, quantity) => ({
   type: ADD_PRODUCT,
   product,
@@ -49,13 +48,13 @@ export const updatedCartToServer = (cartId) => async (dispatch, getState) => {
     console.error(error)
   }
 }
-export const addedItemToCart = (userId, prodId, quantity) => async (
+export const addedItemToCart = (cartId, userId, prodId, quantity) => async (
   dispatch
 ) => {
   try {
     const {data: product} = await axios.get(`/api/products/${prodId}`)
     if (userId !== null) {
-      await axios.put('/api/carts/add', {userId, prodId, quantity})
+      await axios.put(`/api/carts/${cartId}/add`, {userId, prodId, quantity})
     }
     dispatch(addProduct(product, quantity))
   } catch (error) {

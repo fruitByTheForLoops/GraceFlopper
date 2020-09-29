@@ -13,12 +13,21 @@ import carts from './cart'
 //   },
 //   carts: {
 //     activeCart: {
+//       id: ?
 //       checkedOut: false,
 //       items: {
 //         productId: quantity
 //       }
 //     }
-//     pastOrders: []
+//     pastOrders: [
+//       {
+//         id: ?
+//         checkedOut: true,
+//         items: {
+//           productId: quantity
+//         }
+//       }
+//     ]
 //   },
 //   products: [
 //     {

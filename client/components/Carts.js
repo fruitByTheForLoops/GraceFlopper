@@ -26,19 +26,19 @@ export class Carts extends Component {
         this.props.handleRemove(cartId, prodId)
       } else if (name === '+') {
         const quantity = 1
-        this.props.addItem(userId, prodId, quantity)
+        this.props.addItem(cartId, userId, prodId, quantity)
       } else if (name === '-') {
         const quantity = -1
-        this.props.addItem(userId, prodId, quantity)
+        this.props.addItem(cartId, userId, prodId, quantity)
       }
     } else if (name === 'remove') {
       this.props.deleteProduct(prodId)
     } else if (name === '+') {
       const quantity = 1
-      this.props.addItem(null, prodId, quantity)
+      this.props.addItem(cartId, null, prodId, quantity)
     } else if (name === '-') {
       const quantity = -1
-      this.props.addItem(null, prodId, quantity)
+      this.props.addItem(cartId, null, prodId, quantity)
     }
   }
   render() {
@@ -152,8 +152,8 @@ const mapDispatch = (dispatch) => {
     handleRemove(cartId, prodId) {
       dispatch(deleteItemInCart(cartId, prodId))
     },
-    addItem: (userId, prodId, quantity) =>
-      dispatch(addedItemToCart(userId, prodId, quantity)),
+    addItem: (cartId, userId, prodId, quantity) =>
+      dispatch(addedItemToCart(cartId, userId, prodId, quantity)),
   }
 }
 
