@@ -1,5 +1,11 @@
 import {connect} from 'react-redux'
-import {fetchCarts, updatedCartToServer, updateCart} from '../store/index.js'
+import {
+  fetchCarts,
+  updatedCartToServer,
+  updateCart,
+  deleteItemInCart,
+  deleteProduct,
+} from '../store/index.js'
 
 import React, {Component} from 'react'
 
@@ -11,17 +17,24 @@ export class Carts extends Component {
   // component did mount, fetch of carts
   handleClick(ev) {
     ev.preventDefault()
+    const name = ev.target.name
+    const cartId = this.props.carts.activeCart.id
+    const prodId = ev.target.value
     if (this.props.id) {
-      const cartId = ev.target.value
-      this.props.updateCheckout(cartId)
+      if (name === 'remove') {
+        this.props.handleRemove(cartId, prodId)
+      }
+      // this.props.updateCheckout(cartId)
     } else {
-      this.props.updateCart()
+      this.props.deleteProduct(prodId)
+      // this.props.updateCart()
     }
   }
   render() {
     // in render, map our fetched cart, and provide a conditional
     console.log('this.props.carts --->', this.props.carts)
     const fruityseeds = Object.values(this.props.carts.activeCart.fruityseeds)
+    const cartId = this.props.carts.activeCart.id
     return (
       <div>
         <nav aria-label="breadcrumb">
@@ -41,7 +54,7 @@ export class Carts extends Component {
                 <div className="cart-card-body">
                   <table className="cart-card-table">
                     <tbody>
-                      <tr>
+                      <tr onClick={this.handleClick}>
                         <td className="item-thumbnail">
                           <div className="cart-item-image">
                             <img
@@ -66,7 +79,13 @@ export class Carts extends Component {
                             $ {fruityseed.pricePerUnit / 100} x
                             {fruityseed.cartSeed.quantity}
                           </span>
-                          <h6>Remove</h6>
+                          <button
+                            type="button"
+                            name="remove"
+                            value={fruityseed.id}
+                          >
+                            Remove
+                          </button>
                         </td>
                         <td className="item-quantity">
                           <button> + </button>
@@ -118,6 +137,10 @@ const mapDispatch = (dispatch) => {
     fetchInitialCarts: (id) => dispatch(fetchCarts(id)),
     updateCheckout: (cartId) => dispatch(updatedCartToServer(cartId)),
     updateCart: () => dispatch(updateCart()),
+    deleteProduct: (prodId) => dispatch(deleteProduct(prodId)),
+    handleRemove(cartId, prodId) {
+      dispatch(deleteItemInCart(cartId, prodId))
+    },
   }
 }
 
