@@ -3,9 +3,10 @@ import {updateCart, updatedCartToServer} from '../store/index.js'
 
 import React, {Component} from 'react'
 
-export default class Checkout extends Component {
+class Checkout extends Component {
   constructor() {
     super()
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
   handleSubmit() {
     //invoke update
@@ -158,3 +159,16 @@ export default class Checkout extends Component {
     )
   }
 }
+const mapState = (state) => {
+  return {
+    robots: state.robots,
+  }
+}
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchInitialRobots: () => dispatch(fetchRobots()),
+    updateCart: (id) => dispatch(updatedCartToServer(id)),
+  }
+}
+// eslint-disable-next-line no-undef
+export default withRouter(connect(mapState, mapDispatchToProps)(Checkout))
