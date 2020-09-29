@@ -32,6 +32,7 @@ class Routes extends Component {
     const userId = this.props.userId
     const prodId = evt.target.value
     const quantity = 1
+    //to set added to cart value
     this.setState({product: {prodId: prodId, added: true}})
     this.props.addItem(userId, prodId, quantity)
   }
