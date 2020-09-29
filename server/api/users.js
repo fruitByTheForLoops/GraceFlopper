@@ -20,11 +20,13 @@ router.get('/', isAdmin, async (req, res, next) => {
 router.get('/:userId/carts', async (req, res, next) => {
   const userId = req.params.userId
   try {
+    // PROTECTED
     // REMOVE THE CONSOLE LOGS BELOW BEFORE MERGING INTO MAIN
     console.log('is not undefined --> ', req.user.id !== undefined)
     console.log('The User ID --> ', req.user.id)
     console.log('The Params userId -->', req.params.userId)
     console.log('Is Allowed --> ', req.user.id === Number(req.params.userId))
+
     const requestingUser = req.user.id
     const requestedResourceUserId = Number(req.params.userId)
     if (requestingUser !== requestedResourceUserId) {
@@ -34,6 +36,7 @@ router.get('/:userId/carts', async (req, res, next) => {
       throw error
     }
 
+    // BUSINESS LOGIC
     let carts = await Cart.findAll({
       where: {
         userId,
@@ -41,8 +44,6 @@ router.get('/:userId/carts', async (req, res, next) => {
       include: FruitySeed,
     })
 
-    // TODO: Write test to ensure that this
-    // route always returns a non-empty array
     // create an empty cart if the user does not have any
     if (carts.length === 0) {
       const newEmptyCart = await Cart.create({
