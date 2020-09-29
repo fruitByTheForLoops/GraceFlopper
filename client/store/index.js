@@ -18,7 +18,14 @@ import carts from './cart'
 //         productId: quantity
 //       }
 //     }
-//     pastOrders: []
+//     pastOrders: [
+//       {
+//         checkedOut: true,
+//         items: {
+//           productId: quantity
+//         }
+//       }
+//     ]
 //   },
 //   products: [
 //     {
