@@ -17,16 +17,8 @@ export const deleteProduct = (prodId) => ({
   type: DELETE_PRODUCT,
   prodId,
 })
+
 //THUNK CREATOR
-// TODO: Reevaluate whether this thunk is needed
-export const fetchCarts = (id) => async (dispatch) => {
-  try {
-    const response = await axios.get(`/api/users/${id}/carts`)
-    dispatch(getCarts(response.data))
-  } catch (error) {
-    console.error(error)
-  }
-}
 export const updatedCartToServer = (cartId) => async (dispatch) => {
   try {
     await axios.put(`/api/carts/${cartId}`)
@@ -37,13 +29,13 @@ export const updatedCartToServer = (cartId) => async (dispatch) => {
     console.error(error)
   }
 }
-export const addedItemToCart = (userId, prodId, quantity) => async (
+export const addedItemToCart = (cartId, userId, prodId, quantity) => async (
   dispatch
 ) => {
   try {
     const {data: product} = await axios.get(`/api/products/${prodId}`)
     if (userId !== null) {
-      await axios.put('/api/carts/add', {userId, prodId, quantity})
+      await axios.put(`/api/carts/${cartId}/add`, {userId, prodId, quantity})
     }
     dispatch(addProduct(product, quantity))
   } catch (error) {
