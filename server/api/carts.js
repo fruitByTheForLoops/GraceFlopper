@@ -64,18 +64,19 @@ router.put('/:cartId/delete-product/', async (req, res, next) => {
 
 router.put('/:id', async (req, res, next) => {
   try {
-    console.log(req.params.id)
-    await Cart.update(
+    const [n, updatedCart] = await Cart.update(
       {checkedOut: true},
       {
         where: {
           id: req.params.id,
         },
+        returning: true,
       }
     )
-    let updatedCart = await Cart.findByPk(req.params.id)
-    console.log(updatedCart)
-    res.send(updatedCart)
+    const userId = updatedCart[0].getDataValue('userId')
+    const newActiveCart = await Cart.create()
+    await newActiveCart.setUser(userId)
+    res.send(newActiveCart)
   } catch (error) {
     next(error)
   }
