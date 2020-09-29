@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {Cart} = require('../db/models')
+const {FruitySeed, Cart, CartSeed} = require('../db/models')
 module.exports = router
 
 router.get('/', async (req, res, next) => {
@@ -10,6 +10,36 @@ router.get('/', async (req, res, next) => {
     next(error)
   }
 })
+
+router.put('/add', async (req, res, next) => {
+  try {
+    const {userId, prodId, quantity} = req.body
+    const activeCart = await Cart.findOne({
+      where: {
+        userId,
+        checkedOut: false,
+      },
+    })
+    const product = await FruitySeed.findByPk(prodId)
+    await activeCart.addFruityseed(product)
+    const cartSeedInstance = await CartSeed.findOne({
+      where: {
+        cartId: activeCart.id,
+        fruityseedId: prodId,
+      },
+    })
+
+    await cartSeedInstance.increment({
+      quantity: quantity,
+    })
+    //await cartSeedInstance.save()
+    //may need to save
+    res.sendStatus(204)
+  } catch (error) {
+    next(error)
+  }
+})
+
 router.put('/:id', async (req, res, next) => {
   try {
     console.log(req.params.id)
