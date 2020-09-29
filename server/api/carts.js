@@ -40,6 +40,22 @@ router.put('/add', async (req, res, next) => {
   }
 })
 
+router.put(':cartId/delete-product/', async (req, res, next) => {
+  try {
+    const {prodId} = req.body
+    const cartId = req.params.cartId
+    await CartSeed.destory({
+      where: {
+        cartId,
+        fruityseedId: prodId,
+      },
+    })
+    res.sendStatus(204)
+  } catch (error) {
+    next(error)
+  }
+})
+
 router.put('/:id', async (req, res, next) => {
   try {
     console.log(req.params.id)
