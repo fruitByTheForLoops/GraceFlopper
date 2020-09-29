@@ -113,7 +113,6 @@ router.put('/:id/delete-product/', async (req, res, next) => {
 router.put('/:id', async (req, res, next) => {
   // protect here
   try {
-
     const id = req.params.id
     const cart = await Cart.findOne({where: {id}})
     const userId = cart.userId
@@ -138,7 +137,6 @@ router.put('/:id', async (req, res, next) => {
         returning: true,
       }
     )
-    const userId = updatedCart[0].getDataValue('userId')
     const newActiveCart = await Cart.create()
     await newActiveCart.setUser(userId)
     res.send(newActiveCart)
