@@ -4,7 +4,8 @@ import axios from 'axios'
 const GET_CARTS = 'GET_CARTS'
 const ADD_PRODUCT = 'ADD_PRODUCT'
 const ATTEMPTED_AUTH = 'ATTEMPTED_AUTH'
-
+const UPDATE_CART = 'UPDATE_CART'
+const DELETE_PRODUCT = 'DELETE_PRODUCT'
 //ACTION CREATOR
 export const getCarts = (carts) => ({type: GET_CARTS, carts})
 export const addProduct = (product, quantity) => ({
@@ -12,7 +13,11 @@ export const addProduct = (product, quantity) => ({
   product,
   quantity,
 })
-
+export const updateCart = () => ({type: UPDATE_CART})
+export const deleteProduct = (prodId) => ({
+  type: DELETE_PRODUCT,
+  prodId,
+})
 //THUNK CREATOR
 // TODO: Reevaluate whether this thunk is needed
 export const fetchCarts = (id) => async (dispatch) => {
@@ -23,16 +28,33 @@ export const fetchCarts = (id) => async (dispatch) => {
     console.error(error)
   }
 }
-
+export const updatedCartToServer = (cartId) => async (dispatch) => {
+  try {
+    await axios.put(`/api/carts/${cartId}`)
+    dispatch(updateCart())
+    //api request to update the backend cart, by cartId, to update checkout to true
+    //we will then update in the front end pastOrders with action.type, and change activeCart.fruitySeeds to empty
+  } catch (error) {
+    console.error(error)
+  }
+}
 export const addedItemToCart = (userId, prodId, quantity) => async (
   dispatch
 ) => {
   try {
     const {data: product} = await axios.get(`/api/products/${prodId}`)
     if (userId !== null) {
-      await axios.put('/api/products/add', {userId, prodId, quantity})
+      await axios.put('/api/carts/add', {userId, prodId, quantity})
     }
     dispatch(addProduct(product, quantity))
+  } catch (error) {
+    console.error(error)
+  }
+}
+export const deleteItemInCart = (cartId, prodId) => async (dispatch) => {
+  try {
+    await axios.put(`/api/carts/${cartId}/delete-product`, {prodId})
+    dispatch(deleteProduct(prodId))
   } catch (error) {
     console.error(error)
   }
@@ -83,6 +105,19 @@ export default function (state = initialState, action) {
         ...state,
         activeCart: newActiveCart,
       }
+    case UPDATE_CART: {
+      const checkedOutCart = {...state.activeCart, checkedOut: true}
+      return {
+        ...state,
+        pastOrders: [...state.pastOrders, checkedOutCart],
+        activeCart: initialState.activeCart,
+      }
+    }
+    case DELETE_PRODUCT:
+      const newItems = {...state.activeCart.fruityseeds}
+      delete newItems[action.prodId]
+      newActiveCart = {...state.activeCart, fruityseeds: newItems}
+      return {...state, activeCart: newActiveCart}
     default:
       return state
   }

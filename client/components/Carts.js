@@ -1,11 +1,45 @@
 import {connect} from 'react-redux'
-import {fetchCarts} from '../store/index.js'
+import {
+  deleteItemInCart,
+  deleteProduct,
+  addedItemToCart,
+} from '../store/index.js'
 
 import React, {Component} from 'react'
 
 export class Carts extends Component {
+  constructor() {
+    super()
+    this.handleClick = this.handleClick.bind(this)
+  }
   // component did mount, fetch of carts
+  handleClick(evt) {
+    evt.preventDefault()
+    const name = evt.target.name
+    const cartId = this.props.carts.activeCart.id
+    const prodId = evt.target.value
+    const userId = this.props.carts.activeCart.userId
 
+    if (this.props.id) {
+      if (name === 'remove') {
+        this.props.handleRemove(cartId, prodId)
+      } else if (name === '+') {
+        const quantity = 1
+        this.props.addItem(userId, prodId, quantity)
+      } else if (name === '-') {
+        const quantity = -1
+        this.props.addItem(userId, prodId, quantity)
+      }
+    } else if (name === 'remove') {
+      this.props.deleteProduct(prodId)
+    } else if (name === '+') {
+      const quantity = 1
+      this.props.addItem(null, prodId, quantity)
+    } else if (name === '-') {
+      const quantity = -1
+      this.props.addItem(null, prodId, quantity)
+    }
+  }
   render() {
     // in render, map our fetched cart, and provide a conditional
     console.log('this.props.carts --->', this.props.carts)
@@ -27,7 +61,7 @@ export class Carts extends Component {
             {fruityseeds.map((fruityseed) => (
               <div key={fruityseed.id} className="cart-card">
                 <div className="cart-card-body">
-                  <table className="cart-card-table">
+                  <table className="cart-card-table" onClick={this.handleClick}>
                     <tbody>
                       <tr>
                         <td className="item-thumbnail">
@@ -54,11 +88,23 @@ export class Carts extends Component {
                             $ {fruityseed.pricePerUnit / 100} x
                             {fruityseed.cartSeed.quantity}
                           </span>
-                          <h6>Remove</h6>
+                          <button
+                            type="button"
+                            name="remove"
+                            value={fruityseed.id}
+                          >
+                            Remove
+                          </button>
                         </td>
                         <td className="item-quantity">
-                          <button> + </button>
-                          <button> - </button>
+                          <button type="button" name="+" value={fruityseed.id}>
+                            {' '}
+                            +{' '}
+                          </button>
+                          <button type="button" name="-" value={fruityseed.id}>
+                            {' '}
+                            -{' '}
+                          </button>
                         </td>
                       </tr>
                     </tbody>
@@ -76,7 +122,15 @@ export class Carts extends Component {
                 </tr>
               </table>
             </div>
-            <div className="cart-proceed-checkout">Proceed to Checkout</div>
+            <div className="cart-proceed-checkout">
+              <button
+                type="button"
+                // value={this.props.carts.activeCart.id}
+                onClick={this.handleClick}
+              >
+                Check Out
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -95,7 +149,12 @@ const mapState = (state) => {
 
 const mapDispatch = (dispatch) => {
   return {
-    fetchInitialCarts: (id) => dispatch(fetchCarts(id)),
+    deleteProduct: (prodId) => dispatch(deleteProduct(prodId)),
+    handleRemove(cartId, prodId) {
+      dispatch(deleteItemInCart(cartId, prodId))
+    },
+    addItem: (userId, prodId, quantity) =>
+      dispatch(addedItemToCart(userId, prodId, quantity)),
   }
 }
 
