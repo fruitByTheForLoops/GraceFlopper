@@ -29,11 +29,33 @@ router.put('/add', async (req, res, next) => {
       },
     })
 
-    await cartSeedInstance.increment({
-      quantity: quantity,
-    })
+    if (quantity === 1) {
+      await cartSeedInstance.increment({
+        quantity: quantity,
+      })
+    } else if (quantity === -1) {
+      await cartSeedInstance.increment({
+        quantity: quantity,
+      })
+    }
     //await cartSeedInstance.save()
     //may need to save
+    res.sendStatus(204)
+  } catch (error) {
+    next(error)
+  }
+})
+
+router.put('/:cartId/delete-product/', async (req, res, next) => {
+  try {
+    const {prodId} = req.body
+    const cartId = req.params.cartId
+    await CartSeed.destroy({
+      where: {
+        cartId,
+        fruityseedId: prodId,
+      },
+    })
     res.sendStatus(204)
   } catch (error) {
     next(error)
