@@ -4,6 +4,9 @@ import {fetchProducts} from '../store/products'
 import {Link} from 'react-router-dom'
 
 export class Products extends Component {
+  constructor() {
+    super()
+  }
   componentDidMount() {
     this.props.fetch()
   }
@@ -45,7 +48,10 @@ export class Products extends Component {
                     value={product.id}
                     onClick={addItem}
                   >
-                    Add To Cart
+                    {this.props.product.prodId === product.id &&
+                    this.props.product.added
+                      ? 'Added To Cart'
+                      : 'Add To Cart'}
                   </button>
                 </div>
               </div>

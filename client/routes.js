@@ -20,6 +20,7 @@ import {me, addedItemToCart} from './store'
 class Routes extends Component {
   constructor() {
     super()
+    this.state = {product: {added: false, prodId: ''}}
     this.handleAddToCart = this.handleAddToCart.bind(this)
   }
 
@@ -31,6 +32,7 @@ class Routes extends Component {
     const userId = this.props.userId
     const prodId = evt.target.value
     const quantity = 1
+    this.setState({product: {prodId: prodId, added: true}})
     this.props.addItem(userId, prodId, quantity)
   }
 
@@ -45,7 +47,12 @@ class Routes extends Component {
         <Route
           exact
           path="/shop"
-          render={() => <Products addItem={this.handleAddToCart} />}
+          render={() => (
+            <Products
+              addItem={this.handleAddToCart}
+              product={this.state.product}
+            />
+          )}
         />
         <Route
           path="/shop/:prodId"
