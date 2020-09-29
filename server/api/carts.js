@@ -77,12 +77,12 @@ router.put('/:cartId/add', async (req, res, next) => {
   }
 })
 
-router.put('/:cartId/delete-product/', async (req, res, next) => {
+router.put('/:id/delete-product/', async (req, res, next) => {
   // protect here
   try {
     const {prodId} = req.body
-    const cartId = req.params.cartId
-    const cart = await Cart.findOne({where: {id: cartId}})
+    const id = req.params.id
+    const cart = await Cart.findOne({where: {id}})
     const userId = cart.userId
 
     // PROTECTED
@@ -100,7 +100,7 @@ router.put('/:cartId/delete-product/', async (req, res, next) => {
     if (req.user)
       await CartSeed.destroy({
         where: {
-          cartId,
+          cartId: id,
           fruityseedId: prodId,
         },
       })
@@ -113,12 +113,27 @@ router.put('/:cartId/delete-product/', async (req, res, next) => {
 router.put('/:id', async (req, res, next) => {
   // protect here
   try {
-    console.log(req.params.id)
+    const id = req.params.id
+    const cart = await Cart.findOne({where: {id}})
+    const userId = cart.userId
+
+    // PROTECTED
+    const requestingUser = req.user || {id: 0}
+    const requestedResourceUserId = userId
+
+    if (requestingUser.id !== requestedResourceUserId) {
+      console.log('Do I get here?')
+      const error = new Error('Insufficient Privileges')
+      error.status = 401
+      throw error
+    }
+
+    // There is no use of the req.body here
     await Cart.update(
       {checkedOut: true},
       {
         where: {
-          id: req.params.id,
+          id,
         },
       }
     )
