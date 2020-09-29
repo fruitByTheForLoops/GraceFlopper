@@ -1,8 +1,9 @@
 const router = require('express').Router()
 const {FruitySeed, Cart, CartSeed} = require('../db/models')
+const isAdmin = require('../isAdmin')
 module.exports = router
 
-router.get('/', async (req, res, next) => {
+router.get('/', isAdmin, async (req, res, next) => {
   try {
     const carts = await Cart.findAll()
     res.send(carts)
@@ -13,6 +14,7 @@ router.get('/', async (req, res, next) => {
 
 router.put('/:cartId/add', async (req, res, next) => {
   try {
+    // PROTECTED
     const {userId, prodId, quantity} = req.body
     const requestingUser = req.user || {id: 0}
     const requestedResourceUserId = userId
