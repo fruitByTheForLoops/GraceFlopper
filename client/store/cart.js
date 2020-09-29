@@ -1,13 +1,12 @@
 import axios from 'axios'
 
 //ACTION TYPES
-const GET_CARTS = 'GET_CARTS'
 const ADD_PRODUCT = 'ADD_PRODUCT'
 const ATTEMPTED_AUTH = 'ATTEMPTED_AUTH'
 const UPDATE_CART = 'UPDATE_CART'
 const DELETE_PRODUCT = 'DELETE_PRODUCT'
+
 //ACTION CREATOR
-export const getCarts = (carts) => ({type: GET_CARTS, carts})
 export const addProduct = (product, quantity) => ({
   type: ADD_PRODUCT,
   product,
