@@ -1,10 +1,8 @@
 import {connect} from 'react-redux'
 import {
-  fetchCarts,
-  updatedCartToServer,
-  updateCart,
   deleteItemInCart,
   deleteProduct,
+  addedItemToCart,
 } from '../store/index.js'
 
 import React, {Component} from 'react'
@@ -15,26 +13,37 @@ export class Carts extends Component {
     this.handleClick = this.handleClick.bind(this)
   }
   // component did mount, fetch of carts
-  handleClick(ev) {
-    ev.preventDefault()
-    const name = ev.target.name
+  handleClick(evt) {
+    evt.preventDefault()
+    const name = evt.target.name
     const cartId = this.props.carts.activeCart.id
-    const prodId = ev.target.value
+    const prodId = evt.target.value
+    const userId = this.props.carts.activeCart.userId
+
     if (this.props.id) {
       if (name === 'remove') {
         this.props.handleRemove(cartId, prodId)
+      } else if (name === '+') {
+        const quantity = 1
+        this.props.addItem(userId, prodId, quantity)
+      } else if (name === '-') {
+        const quantity = -1
+        this.props.addItem(userId, prodId, quantity)
       }
-      // this.props.updateCheckout(cartId)
-    } else {
-      this.props.deleteProduct(prodId)
-      // this.props.updateCart()
-    }
+    } else if (name === 'remove') {
+        this.props.deleteProduct(prodId)
+      } else if (name === '+') {
+        const quantity = 1
+        this.props.addItem(null, prodId, quantity)
+      } else if (name === '-') {
+        const quantity = -1
+        this.props.addItem(null, prodId, quantity)
+      }
   }
   render() {
     // in render, map our fetched cart, and provide a conditional
     console.log('this.props.carts --->', this.props.carts)
     const fruityseeds = Object.values(this.props.carts.activeCart.fruityseeds)
-    const cartId = this.props.carts.activeCart.id
     return (
       <div>
         <nav aria-label="breadcrumb">
@@ -52,9 +61,9 @@ export class Carts extends Component {
             {fruityseeds.map((fruityseed) => (
               <div key={fruityseed.id} className="cart-card">
                 <div className="cart-card-body">
-                  <table className="cart-card-table">
+                  <table className="cart-card-table" onClick={this.handleClick}>
                     <tbody>
-                      <tr onClick={this.handleClick}>
+                      <tr>
                         <td className="item-thumbnail">
                           <div className="cart-item-image">
                             <img
@@ -88,8 +97,14 @@ export class Carts extends Component {
                           </button>
                         </td>
                         <td className="item-quantity">
-                          <button> + </button>
-                          <button> - </button>
+                          <button type="button" name="+" value={fruityseed.id}>
+                            {' '}
+                            +{' '}
+                          </button>
+                          <button type="button" name="-" value={fruityseed.id}>
+                            {' '}
+                            -{' '}
+                          </button>
                         </td>
                       </tr>
                     </tbody>
@@ -110,7 +125,7 @@ export class Carts extends Component {
             <div className="cart-proceed-checkout">
               <button
                 type="button"
-                value={this.props.carts.activeCart.id}
+                // value={this.props.carts.activeCart.id}
                 onClick={this.handleClick}
               >
                 Check Out
@@ -134,13 +149,12 @@ const mapState = (state) => {
 
 const mapDispatch = (dispatch) => {
   return {
-    fetchInitialCarts: (id) => dispatch(fetchCarts(id)),
-    updateCheckout: (cartId) => dispatch(updatedCartToServer(cartId)),
-    updateCart: () => dispatch(updateCart()),
     deleteProduct: (prodId) => dispatch(deleteProduct(prodId)),
     handleRemove(cartId, prodId) {
       dispatch(deleteItemInCart(cartId, prodId))
     },
+    addItem: (userId, prodId, quantity) =>
+      dispatch(addedItemToCart(userId, prodId, quantity)),
   }
 }
 

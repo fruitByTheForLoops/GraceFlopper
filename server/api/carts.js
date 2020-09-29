@@ -29,9 +29,15 @@ router.put('/add', async (req, res, next) => {
       },
     })
 
-    await cartSeedInstance.increment({
-      quantity: quantity,
-    })
+    if (quantity === 1) {
+      await cartSeedInstance.increment({
+        quantity: quantity,
+      })
+    } else if (quantity === -1) {
+      await cartSeedInstance.increment({
+        quantity: quantity,
+      })
+    }
     //await cartSeedInstance.save()
     //may need to save
     res.sendStatus(204)
