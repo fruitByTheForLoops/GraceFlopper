@@ -82,12 +82,28 @@ router.put('/:cartId/delete-product/', async (req, res, next) => {
   try {
     const {prodId} = req.body
     const cartId = req.params.cartId
-    await CartSeed.destroy({
-      where: {
-        cartId,
-        fruityseedId: prodId,
-      },
-    })
+    const cart = await Cart.findOne({where: {id: cartId}})
+    const userId = cart.userId
+
+    // PROTECTED
+    const requestingUser = req.user || {id: 0}
+    const requestedResourceUserId = userId
+
+    if (requestingUser.id !== requestedResourceUserId) {
+      console.log('Do I get here?')
+      const error = new Error('Insufficient Privileges')
+      error.status = 401
+      throw error
+    }
+
+    // BUSINESS LOGIC
+    if (req.user)
+      await CartSeed.destroy({
+        where: {
+          cartId,
+          fruityseedId: prodId,
+        },
+      })
     res.sendStatus(204)
   } catch (error) {
     next(error)
