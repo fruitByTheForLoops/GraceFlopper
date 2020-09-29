@@ -113,11 +113,12 @@ export default function (state = initialState, action) {
         activeCart: initialState.activeCart,
       }
     }
-    case DELETE_PRODUCT:
+    case DELETE_PRODUCT: {
       const newItems = {...state.activeCart.fruityseeds}
       delete newItems[action.prodId]
       newActiveCart = {...state.activeCart, fruityseeds: newItems}
       return {...state, activeCart: newActiveCart}
+    }
     default:
       return state
   }

@@ -61,6 +61,8 @@ class Routes extends Component {
             {/* Routes placed here are only available after logging in */}
             <Route exact path="/home" component={UserHome} />
             <Route exact path="/" component={LandingPage} />
+            <Route path="/checkout" component={Checkout} />
+            <Route path="/confirmation" component={Confirmation} />
             <Route component={NoneFound} />
           </Switch>
         )}
