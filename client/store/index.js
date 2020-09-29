@@ -13,6 +13,7 @@ import carts from './cart'
 //   },
 //   carts: {
 //     activeCart: {
+//       id: ?
 //       checkedOut: false,
 //       items: {
 //         productId: quantity
@@ -20,6 +21,7 @@ import carts from './cart'
 //     }
 //     pastOrders: [
 //       {
+//         id: ?
 //         checkedOut: true,
 //         items: {
 //           productId: quantity

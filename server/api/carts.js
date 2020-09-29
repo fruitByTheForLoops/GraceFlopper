@@ -11,33 +11,62 @@ router.get('/', async (req, res, next) => {
   }
 })
 
-router.put('/add', async (req, res, next) => {
+router.put('/:cartId/add', async (req, res, next) => {
   try {
     const {userId, prodId, quantity} = req.body
+    const requestingUser = req.user || {id: 0}
+    const requestedResourceUserId = userId
+
+    if (requestingUser.id !== requestedResourceUserId) {
+      console.log('Do I get here?')
+      const error = new Error('Insufficient Privileges')
+      error.status = 401
+      throw error
+    }
+
+    // if user is the correct user, then go on
+    const cartId = req.params.cartId
     const activeCart = await Cart.findOne({
       where: {
-        userId,
+        id: cartId,
         checkedOut: false,
       },
     })
+
     const product = await FruitySeed.findByPk(prodId)
     await activeCart.addFruityseed(product)
+    // let productId = Number(prodId)
+    // const productAlreadyInCart = await activeCart.hasFruityseed(productId)
+    // console.log('prodId -->', prodId)
+    // console.log('productAlreadyInCart --> ', productAlreadyInCart)
+    // let cartSeedInstance
+    // if (productAlreadyInCart) {
+    //   cartSeedInstance = await activeCart.getFruityseeds(productId)
+    // } else {
+    //   cartSeedInstance = await activeCart.addFruityseed(productId)
+    // }
+
+    // increment appropriately
     const cartSeedInstance = await CartSeed.findOne({
       where: {
-        cartId: activeCart.id,
+        cartId,
         fruityseedId: prodId,
       },
     })
 
-    if (quantity === 1) {
-      await cartSeedInstance.increment({
-        quantity: quantity,
-      })
-    } else if (quantity === -1) {
-      await cartSeedInstance.increment({
-        quantity: quantity,
-      })
-    }
+    await cartSeedInstance.increment({
+      quantity,
+    })
+
+    // if (quantity === 1) {
+    //   await cartSeedInstance.increment({
+    //     quantity: quantity,
+    //   })
+    // } else if (quantity === -1) {
+    //   await cartSeedInstance.increment({
+    //     quantity: quantity,
+    //   })
+    // }
     //await cartSeedInstance.save()
     //may need to save
     res.sendStatus(204)
@@ -47,6 +76,7 @@ router.put('/add', async (req, res, next) => {
 })
 
 router.put('/:cartId/delete-product/', async (req, res, next) => {
+  // protect here
   try {
     const {prodId} = req.body
     const cartId = req.params.cartId
@@ -63,6 +93,7 @@ router.put('/:cartId/delete-product/', async (req, res, next) => {
 })
 
 router.put('/:id', async (req, res, next) => {
+  // protect here
   try {
     console.log(req.params.id)
     await Cart.update(

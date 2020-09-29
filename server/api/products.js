@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {FruitySeed, Cart, CartSeed} = require('../db/models')
+const {FruitySeed} = require('../db/models')
 const isAdmin = require('../isAdmin')
 module.exports = router
 
@@ -53,31 +53,4 @@ router.put('/:id', isAdmin, async (req, res, next) => {
 
 router.delete('/:id', isAdmin, async (req, res, next) => {
   res.send(req.params.id)
-})
-
-// This route needs to be refactored
-router.put('/add', async (req, res, next) => {
-  try {
-    const {userId, prodId, quantity} = req.body
-    const activeCart = await Cart.findOne({
-      where: {
-        userId,
-        checkedOut: false,
-      },
-    })
-    const product = await FruitySeed.findByPk(prodId)
-    await activeCart.addFruityseed(product)
-    await CartSeed.update(
-      {quantity},
-      {
-        where: {
-          cartId: activeCart.id,
-          fruityseedId: prodId,
-        },
-      }
-    )
-    res.sendStatus(204)
-  } catch (error) {
-    next(error)
-  }
 })

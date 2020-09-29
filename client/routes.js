@@ -28,10 +28,12 @@ class Routes extends Component {
   }
 
   handleAddToCart(evt) {
+    const cartId = this.props.cartId
+    console.log('cartId -->', cartId)
     const userId = this.props.userId
     const prodId = evt.target.value
     const quantity = 1
-    this.props.addItem(userId, prodId, quantity)
+    this.props.addItem(cartId, userId, prodId, quantity)
   }
 
   render() {
@@ -79,6 +81,7 @@ const mapState = (state) => {
     // Otherwise, state.user will be an empty object, and state.user.id will be falsey
     isLoggedIn: !!state.user.id,
     userId: state.user.id || null,
+    cartId: state.carts.activeCart.id || null,
   }
 }
 
@@ -87,8 +90,8 @@ const mapDispatch = (dispatch) => {
     loadInitialData() {
       dispatch(me())
     },
-    addItem: (userId, prodId, quantity) =>
-      dispatch(addedItemToCart(userId, prodId, quantity)),
+    addItem: (cartId, userId, prodId, quantity) =>
+      dispatch(addedItemToCart(cartId, userId, prodId, quantity)),
   }
 }
 
