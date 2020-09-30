@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Carousel = props => {
+const Carousel = (props) => {
   return (
     <div
       id="carouselExampleCaptions"
@@ -23,10 +23,10 @@ const Carousel = props => {
             className="d-block w-100"
             alt="..."
           />
-          <div className="carousel-caption d-none d-md-block">
+          {/*<div className="carousel-caption d-none d-md-block">
             <h5>Seed 1</h5>
             <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-          </div>
+          </div>*/}
         </div>
         <div className="carousel-item">
           <img
@@ -34,10 +34,10 @@ const Carousel = props => {
             className="d-block w-100"
             alt="..."
           />
-          <div className="carousel-caption d-none d-md-block">
-            <h5>Seed 2</h5>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-          </div>
+          {/*<div className="carousel-caption d-none d-md-block">
+      <h5>Seed 2</h5>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+      </div>*/}
         </div>
         <div className="carousel-item">
           <img
@@ -45,12 +45,12 @@ const Carousel = props => {
             className="d-block w-100"
             alt="..."
           />
-          <div className="carousel-caption d-none d-md-block">
+          {/*<div className="carousel-caption d-none d-md-block">
             <h5>Seed 3</h5>
             <p>
               Praesent commodo cursus magna, vel scelerisque nisl consectetur.
             </p>
-          </div>
+          </div>*/}
         </div>
       </div>
       <a
