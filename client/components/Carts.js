@@ -43,7 +43,6 @@ export class Carts extends Component {
   }
   render() {
     // in render, map our fetched cart, and provide a conditional
-    console.log('this.props.carts --->', this.props.carts)
     const fruityseeds = Object.values(this.props.carts.activeCart.fruityseeds)
     return (
       <div>

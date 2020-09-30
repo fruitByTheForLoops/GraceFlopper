@@ -8,17 +8,9 @@ export class Checkout extends Component {
     super()
     this.handleClick = this.handleClick.bind(this)
   }
-  // handleChange(e) {
-  //   const {selectedRobot} = {...this.state};
-  //   const currentState = selectedRobot
-  //   const {name, value} = e.target
-  //   currentState[name] = value
-  //   this.setState({ selectedRobot: currentState })
-  // }
+
   handleClick(ev) {
     ev.preventDefault()
-    console.log(this.props)
-    //const cartId = ev.target.value
     const cartId = this.props.carts.activeCart.id
     if (this.props.id) {
       this.props.updateCheckout(cartId)

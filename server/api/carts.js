@@ -20,13 +20,11 @@ router.put('/:cartId/add', async (req, res, next) => {
     const requestedResourceUserId = userId
 
     if (requestingUser.id !== requestedResourceUserId) {
-      console.log('Do I get here?')
       const error = new Error('Insufficient Privileges')
       error.status = 401
       throw error
     }
 
-    // if user is the correct user, then go on
     const cartId = req.params.cartId
     const activeCart = await Cart.findOne({
       where: {
@@ -37,18 +35,7 @@ router.put('/:cartId/add', async (req, res, next) => {
 
     const product = await FruitySeed.findByPk(prodId)
     await activeCart.addFruityseed(product)
-    // let productId = Number(prodId)
-    // const productAlreadyInCart = await activeCart.hasFruityseed(productId)
-    // console.log('prodId -->', prodId)
-    // console.log('productAlreadyInCart --> ', productAlreadyInCart)
-    // let cartSeedInstance
-    // if (productAlreadyInCart) {
-    //   cartSeedInstance = await activeCart.getFruityseeds(productId)
-    // } else {
-    //   cartSeedInstance = await activeCart.addFruityseed(productId)
-    // }
 
-    // increment appropriately
     const cartSeedInstance = await CartSeed.findOne({
       where: {
         cartId,
@@ -60,17 +47,6 @@ router.put('/:cartId/add', async (req, res, next) => {
       quantity,
     })
 
-    // if (quantity === 1) {
-    //   await cartSeedInstance.increment({
-    //     quantity: quantity,
-    //   })
-    // } else if (quantity === -1) {
-    //   await cartSeedInstance.increment({
-    //     quantity: quantity,
-    //   })
-    // }
-    //await cartSeedInstance.save()
-    //may need to save
     res.sendStatus(204)
   } catch (error) {
     next(error)
@@ -78,7 +54,6 @@ router.put('/:cartId/add', async (req, res, next) => {
 })
 
 router.put('/:id/delete-product/', async (req, res, next) => {
-  // protect here
   try {
     const {prodId} = req.body
     const id = req.params.id
@@ -90,7 +65,6 @@ router.put('/:id/delete-product/', async (req, res, next) => {
     const requestedResourceUserId = userId
 
     if (requestingUser.id !== requestedResourceUserId) {
-      console.log('Do I get here?')
       const error = new Error('Insufficient Privileges')
       error.status = 401
       throw error
@@ -122,7 +96,6 @@ router.put('/:id', async (req, res, next) => {
     const requestedResourceUserId = userId
 
     if (requestingUser.id !== requestedResourceUserId) {
-      console.log('Do I get here?')
       const error = new Error('Insufficient Privileges')
       error.status = 401
       throw error
