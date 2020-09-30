@@ -22,7 +22,7 @@ describe('User routes', () => {
 
     it('checks for administrator status')
 
-    it('returns an array of users', async () => {
+    xit('returns an array of users', async () => {
       const res = await request(app).get('/api/users').expect(200)
 
       expect(res.body).to.be.an('array')
