@@ -8,7 +8,7 @@ const Navbar = ({handleClick, isLoggedIn}) => (
   <div>
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <div className="navbar-brand">
-        <img src="/GraceFlopper.png" height="50rem" width="200rem" />
+        <img src="/gfs.png" height="50rem" width="200rem" />
       </div>
       <button
         className="navbar-toggler"
@@ -81,17 +81,6 @@ const Navbar = ({handleClick, isLoggedIn}) => (
           </div>
         )}
       </div>
-      <form className="form-inline">
-        <input
-          className="form-control"
-          type="search"
-          placeholder="Search"
-          aria-label="Search"
-        />
-        <button className="btn btn-outline-success" type="submit">
-          Search
-        </button>
-      </form>
     </nav>
   </div>
 )

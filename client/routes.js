@@ -31,7 +31,6 @@ class Routes extends Component {
 
   handleAddToCart(evt) {
     const cartId = this.props.cartId
-    console.log('cartId -->', cartId)
     const userId = this.props.userId
     const prodId = evt.target.value
     const quantity = 1

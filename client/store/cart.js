@@ -87,7 +87,6 @@ export default function (state = initialState, action) {
     case ADD_PRODUCT:
       productId = action.product.id.toString()
       existingEntry = state.activeCart.fruityseeds[productId]
-      console.log('Existing entry -->', existingEntry)
       if (existingEntry) {
         previousQuantity = existingEntry.cartSeed.quantity
         cartEntry = {
