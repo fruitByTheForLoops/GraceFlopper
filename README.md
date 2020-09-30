@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/khu-md/GraceFlopper.svg?branch=main)](https://travis-ci.org/khu-md/GraceFlopper)
+
 # Grace Flopper
 
 An e-commerce website built with [Boilermaker](https://github.com/FullstackAcademy/boilermaker) and uses [trefle.io](trefle.io).
